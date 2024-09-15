@@ -1,0 +1,74 @@
+.menu-list {
+    width: 224px;
+    // background-color: red;
+    // .menu-item {
+    //     margin-left: 0;
+    // }
+}
+.wrap-popper_birthday {
+    width: 120px;
+    height: 260px !important;
+}
+.wrap_manageItem {
+    width: 230px;
+}
+.wrap-menuShare {
+    width: 280px;
+}
+.wrap_watch-video {
+    width: 334px;
+}
+.comment_wrap-share {
+    width: 300px;
+}
+//comment cái này và unComment, copy past lên cái kia để giống f8
+.menu-item {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-family);
+    line-height: 1.8rem !important;
+    margin-left: 0px !important;
+    width: 100%;
+    justify-content: left !important;
+    border-radius: 0px !important;
+    padding: 11px 16px !important;
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+    &.separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+}
+
+.menu-popper {
+    padding-bottom: 8px;
+}
+.menu-scrollable {
+    overflow-y: auto;
+    scrollbar-width: auto;
+}
+
+.header {
+    flex-shrink: 0;
+    align-items: center;
+    height: 41px;
+    // background-color: red;
+    position: relative;
+}
+.back-btn {
+    width: 41px;
+    height: 100%;
+    background-color: transparent;
+}
+.header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.wrap-menuShare {
+    .header-title {
+        padding: 2px 5px;
+        cursor: pointer;
+    }
+}

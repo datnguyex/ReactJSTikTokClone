@@ -1,0 +1,40 @@
+.menu-item {
+    display: flex;
+    padding: 8px 8px;
+    font-weight: 700;
+    align-items: center;
+    font-size: 1.8rem;
+
+    border-radius: 4px;
+    transition: background-color 200ms ease-in-out;
+    // background-color: aqua;
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+    &.active {
+        color: var(--primary);
+        .active-icon {
+            display: flex;
+            align-items: center;
+        }
+        .icon {
+            display: none;
+        }
+    }
+}
+
+.title {
+    margin-left: 10px;
+}
+.icon,
+.active-icon {
+    display: flex;
+    align-items: center;
+}
+
+.active-icon {
+    display: none;
+}
+.sidebar-item {
+    margin-bottom: 8px;
+}

@@ -1,0 +1,101 @@
+.wrapper {
+    --search-border-radius: 92px;
+    --search-height: 46px;
+    --search-spacer: 9px;
+    --search-button-width: 52px;
+    width: 100%;
+    height: var(--default-layout-header-height);
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    display: flex;
+    z-index: 2;
+    justify-content: center;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    left: 0;
+}
+.inner {
+    height: 100%;
+    width: var(--default-layout-width);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+// .logo {
+// }
+.logo-link {
+    display: flex;
+    width: 300px;
+    cursor: auto;
+    img {
+        cursor: pointer;
+    }
+}
+
+.search {
+    position: relative;
+    height: var(--search-height);
+    display: flex;
+    background-color: rgba(22, 24, 35, 0.06);
+    border-radius: var(--search-border-radius);
+    padding-left: 16px;
+    border: 1.5px solid transparent;
+    input {
+        caret-color: var(--primary);
+        height: 100%;
+        background-color: transparent;
+        font-size: 1.6rem;
+        color: var(--black);
+        flex: 1;
+    }
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: rgba(22, 24, 35, 0.75);
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: calc(var(--search-height) - var(--search-spacer) * 2);
+        background-color: rgba(22, 24, 35, 0.12);
+        top: var(--search-spacer);
+        right: var(--search-button-width);
+    }
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    // background-color: red;
+    justify-content: center;
+    height: 100%;
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 12px;
+}
+
+.action-btn {
+    background-color: transparent;
+    font-size: 2.2rem;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+.more-btn {
+    background-color: transparent;
+    font-size: 2rem;
+    margin-left: 24px;
+    padding: 4px 8px;
+}
+.icon-header {
+    // background-color: white;
+    line-height: 30px;
+    display: block;
+}

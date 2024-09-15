@@ -1,0 +1,15 @@
+.wrapper {
+    display: inline-block;
+    // min-height: 1000px;
+    width: 242px;
+    height: 87vh;
+    padding: 20px 0px 26px 8px;
+    margin-left: -20px;
+    overflow-y: auto !important;
+    scrollbar-width: none;
+    position: fixed;
+}
+
+.mouseEnter {
+    scrollbar-width: auto !important;
+}

@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.container {
+    margin-top: var(--default-layout-header-height);
+    width: var(--default-layout-width);
+    display: flex;
+    max-width: 100%;
+    // background-color: aquamarine;
+    // min-height: 1000px;
+}
+
+.content {
+    margin-left: 242px;
+    flex: 1;
+}
+.btn-get {
+    bottom: 2%;
+    right: 2%;
+    position: fixed;
+}

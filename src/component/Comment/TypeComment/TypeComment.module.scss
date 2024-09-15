@@ -1,0 +1,110 @@
+.wrap-comment__member {
+    padding: 24px 32px 0px 32px;
+}
+.wrap-comment__member {
+    display: flex;
+}
+.img-comment__member {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+}
+.wrap-comment__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.comment__member-name {
+    cursor: pointer;
+
+    color: rgb(22, 24, 35);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+.comment__member-icon {
+    cursor: pointer;
+}
+.comment__member-des {
+    cursor: pointer;
+
+    color: rgb(22, 24, 35);
+    line-height: 2.1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+.wrap-reply__comment {
+    display: flex;
+    align-items: center;
+}
+.date-post__comemnt {
+    color: rgba(22, 24, 35, 0.5);
+    line-height: 1.8rem;
+    width: 64px;
+    font-size: 1.4rem;
+}
+.date-post__reply {
+    color: rgba(22, 24, 35, 0.5);
+    line-height: 1.8rem;
+    font-size: 1.4rem;
+}
+.wrap-footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 42%;
+    background-color: rgb(255, 255, 255);
+    padding: 21px 30px;
+    border-top: 1px solid rgba(22, 24, 35, 0.2);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.wrap-input__footer {
+    flex: 1;
+    position: relative;
+    display: flex;
+    background-color: rgba(22, 24, 35, 0.06);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 0px 9px;
+    align-items: center;
+    justify-content: space-between;
+    cursor: text;
+}
+.wrap-icon__fotter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input-fotter {
+    background-color: transparent;
+    color: rgb(22, 24, 35);
+
+    font-size: 14px;
+    line-height: 17px;
+}
+.icon__fotter {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    margin: 3px;
+    cursor: pointer;
+    border-radius: 8px;
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.12);
+    }
+}
+
+.btn-footer {
+    color: rgb(254, 44, 85);
+
+    font-weight: 600;
+    cursor: pointer;
+    flex: 0 0 48px;
+    font-size: 1.4rem;
+    line-height: 3.9rem;
+    margin-left: 4px;
+}

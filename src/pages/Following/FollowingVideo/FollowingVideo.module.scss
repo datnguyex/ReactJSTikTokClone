@@ -1,0 +1,78 @@
+.video-container {
+    position: relative;
+}
+.home-video {
+    border-radius: 16px;
+    object-fit: cover;
+    border: 1px solid transparent;
+    video {
+        object-fit: cover;
+        border-radius: 16px;
+    }
+}
+.infor-video {
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    padding: 12px 12px 16px 12px;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.9);
+}
+.nickname {
+    margin: 8px 0px;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+}
+.des {
+    display: flex;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    width: 100%;
+}
+.sound-icon {
+    font-size: 1.4rem;
+}
+.sound-info {
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+.control {
+    z-index: 3;
+    padding: 4px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.left-icon {
+    display: flex;
+    align-items: center;
+}
+
+.video-icon {
+    cursor: pointer;
+    padding: 8px;
+}
+.space {
+    opacity: 0;
+}
+
+video::-webkit-media-controls {
+    opacity: 0;
+}
+.hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.2s ease, transform 0.3s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.2s ease, transform 0.3s ease;
+}

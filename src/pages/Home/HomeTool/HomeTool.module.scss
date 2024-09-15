@@ -1,0 +1,53 @@
+.avatar {
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 1px 1px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-image: url('https://png.pngtree.com/png-vector/20190710/ourlarge/pngtree-user-vector-avatar-png-image_1541962.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.wrap-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.icon {
+    cursor: pointer;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    background-color: red;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(22, 24, 35, 0.06);
+}
+.check-icon {
+    position: absolute;
+    background-color: var(--primary);
+    border-color: var(--primary);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: calc(100% - 12px);
+    left: calc(50% - 12px);
+    cursor: pointer;
+}
+.text {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: rgba(22, 24, 35, 0.75);
+    text-align: center;
+}

@@ -1,0 +1,113 @@
+.wrapper {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 170%;
+    z-index: 999;
+}
+
+.hidden {
+    width: 363px;
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    width: 483px;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    top: 0;
+    overflow-y: auto;
+    left: calc(50% - 241px);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
+    animation: hideContent 0.3s ease forwards;
+}
+
+.wrap-content {
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    width: 483px;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    top: 0;
+    overflow-y: auto;
+    left: calc(50% - 241px);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
+    animation: showContent 0.3s ease forwards;
+}
+.wrap-content::-webkit-scrollbar {
+    display: none;
+}
+.close-btn {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    border-radius: 50%;
+    padding: 8px 8px;
+    background: rgba(22, 24, 35, 0.03);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.content {
+    margin: 64px auto 16px;
+}
+
+.login-terms {
+    color: rgba(22, 24, 35, 0.5);
+
+    font-size: 1.2rem;
+    line-height: 15px;
+    width: 337px;
+    text-align: center;
+    padding-top: 16px;
+}
+.Policy {
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 600;
+    font-size: 12px;
+}
+.space {
+    opacity: 0;
+}
+.SignUp {
+    padding: 23px;
+    align-items: center;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    display: flex;
+    justify-content: center;
+    color: rgb(22, 24, 35);
+
+    cursor: pointer;
+    border-top: 0.5px solid rgba(22, 24, 35, 0.12);
+}
+.text-SignUp {
+    margin-left: 5px;
+    font-weight: 400;
+    color: rgb(254, 44, 85);
+}
+@keyframes showContent {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes hideContent {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}

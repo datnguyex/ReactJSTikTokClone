@@ -1,0 +1,29 @@
+.wrapper {
+    margin-right: 100px;
+}
+.tool {
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.info {
+    display: flex;
+    padding: 16px 72px 16px 16px;
+    justify-content: center;
+}
+
+.show {
+    animation: show 0.8s;
+}
+
+@keyframes show {
+    0% {
+        transform: scale(1); /* Start with original size */
+    }
+    50% {
+        transform: scale(1.5); /* Scale up to twice the original size */
+    }
+    100% {
+        transform: scale(1); /* Return to original size */
+    }
+}

@@ -1,0 +1,134 @@
+.wrapper {
+    margin: 0px auto;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    background-color: white;
+    padding: 48px 50px 64px;
+    margin-top: 16px;
+}
+.item-icon {
+    padding-top: 3px;
+    width: 24px;
+    height: 24px;
+}
+.content__upload-Video {
+    position: relative;
+    border-radius: 4px;
+    border: 1px dashed rgba(0, 0, 0, 0.15);
+    height: 500px !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f8f8f8;
+}
+.content__up-Video {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.content__upload-text {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+}
+.content__upload-instruction {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 16px;
+}
+.content__upload-btn {
+    margin-top: 16px;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 130%;
+    border-radius: 6px;
+    width: 200px;
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    min-width: 108px;
+    background-color: #fe2c55;
+}
+.wrap-introduce {
+    display: flex;
+    padding: 24px 0px 0px;
+}
+.introduce-item {
+    flex: 1 1 0%;
+    display: flex;
+}
+.item-wrap__text {
+    max-width: 220px;
+    padding: 0px 8px 0px 16px;
+}
+
+.item-img {
+    width: 24px;
+    height: 24px;
+}
+.wrap-parent {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+.wrap-parent::-webkit-scrollbar {
+    display: none;
+}
+
+.item-text1 {
+    color: #000;
+    font-size: 1.6rem;
+
+    font-weight: 500;
+    line-height: 130%;
+    letter-spacing: 0.24px;
+}
+.item-text2 {
+    margin-top: 5px;
+    color: rgba(0, 0, 0, 0.48);
+    font-size: 1.4rem;
+
+    font-weight: 400;
+    line-height: 130%;
+}
+.wrapper-bottom {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 16px;
+    margin: 16px 0px;
+    justify-content: space-between;
+}
+.capcut-text1 {
+    color: inherit;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+.capcut-text2 {
+    color: rgba(0, 0, 0, 0.48);
+    font-size: 14px;
+    font-weight: inherit;
+}
+.wrap__capcut-btn {
+    border-radius: 6px;
+    font-size: 16px;
+    height: 40px;
+    line-height: 21px;
+    min-width: 108px;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: rgb(242 242 242);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        background-color: rgb(224 224 224);
+    }
+}

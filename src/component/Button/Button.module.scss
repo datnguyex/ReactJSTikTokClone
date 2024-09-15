@@ -1,0 +1,113 @@
+//wrapper -> bat buoc
+//class custom
+//lua chon 1 -> text (css rieng ) , 2 -> size , color , type
+//hover se dung cho mau
+//cach tu duy rieng
+
+// -> f8 mac dinh la size vua / hinh vuong(khong mau de phu hop voi kieu text)
+// , neu chon hinh tron mac dinh cua hinh tron (mau trang, co 1 chut mau trang -> phu hop 1 hinh ban dau -> hoac co the su dung ko mau nhu hinh vuong va tu them mau cua hinh do )
+//-> chi can chon size lon hoac nho va hinh tron xong roi chon size
+// f8 ok hon
+//nen hoc theo -> ap dung cho tuong lai
+.wrapper {
+    font-weight: 700;
+    font-size: 1.6rem;
+    min-width: 100px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    //Xóa cái này cho giống f8 nhưng màu sẽ bị lỗi
+    background-color: transparent;
+
+    + .wrapper {
+        margin-left: 8px;
+    }
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+        user-select: none;
+    }
+}
+.wrap-menuShare {
+    .icon + .title,
+    .title + .icon {
+        margin-left: 12px;
+    }
+}
+.icon + .title,
+.title + .icon {
+    margin-left: 6px;
+}
+
+.icon {
+    display: inline-block;
+    width: 24px;
+    // background-color: aqua;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    text-align: center;
+}
+//button type
+
+.rounded {
+    background-color: var(--white);
+    font-size: 1.4rem;
+    border-color: rgba(22, 24, 35, 0.12);
+    color: rgba(22, 24, 35, 0.75);
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
+    border-radius: 52px;
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.2);
+        background-color: rgb(255, 255, 255);
+    }
+}
+
+.primary {
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    &:hover {
+        border-color: var(--primary);
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
+    }
+}
+.outline {
+    color: var(--primary);
+    border-color: currentColor;
+    background-color: var(--white);
+    &:hover {
+        border-color: currentColor;
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+
+//button size
+.small {
+    min-width: 88px;
+    padding: 8px 12px;
+    .icon + .title,
+    .title + .icon {
+        margin-left: 0px;
+    }
+}
+.large {
+    min-width: 140px;
+    padding: 14px 79px;
+    // padding: 14px 80px;
+}
+//button disabled
+.text {
+    background-color: var(--white);
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// .custom-login {
+//     color: red;
+// }

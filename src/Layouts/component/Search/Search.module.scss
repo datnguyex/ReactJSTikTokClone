@@ -1,0 +1,84 @@
+.search {
+    position: relative;
+    height: var(--search-height);
+    display: flex;
+    background-color: rgba(22, 24, 35, 0.06);
+    border-radius: var(--search-border-radius);
+    padding-left: 16px;
+    border: 1.5px solid transparent;
+    input {
+        font-family: var(--font-family);
+        caret-color: var(--primary);
+        height: 100%;
+        background-color: transparent;
+        font-size: 1.6rem;
+        color: var(--black);
+        flex: 1;
+        padding-right: 32px;
+    }
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: rgba(22, 24, 35, 0.75);
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: calc(var(--search-height) - var(--search-spacer) * 2);
+        background-color: rgba(22, 24, 35, 0.12);
+        top: var(--search-spacer);
+        right: var(--search-button-width);
+    }
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
+}
+.search,
+.search-result {
+    width: 500px;
+}
+
+.clear,
+.loading {
+    font-size: 1.6rem;
+    position: absolute;
+    right: calc(var(--search-button-width) + 16px);
+    top: calc(50% - 1rem);
+    color: rgba(22, 24, 35, 0.34);
+}
+.loading {
+    animation: spinner 0.5s linear infinite;
+}
+.search-btn {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: var(--search-button-width);
+    font-size: 1.6rem;
+    border-top-right-radius: var(--search-border-radius);
+    border-bottom-right-radius: var(--search-border-radius);
+    color: rgba(22, 24, 35, 0.34);
+    font-size: 1.8rem;
+    cursor: pointer;
+    &:active {
+        background-color: rgba(22, 24, 35, 0.06);
+    }
+    &:hover {
+        color: rgb(22, 24, 35);
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+}
+.search-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.5);
+    padding: 5px 12px;
+}
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

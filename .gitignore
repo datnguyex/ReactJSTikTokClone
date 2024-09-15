@@ -1,0 +1,34 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+
+# Caches
+.settings/
+.cache/
+node_modules/
+/node_modules
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+
+# Temporary and Backup Files
+*.log
+*.tmp
+*.swp
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Ignore node_modules
+# eslint cache
+.eslintcachen
+
+# Ignore build and cache folders
+*.cache/
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
