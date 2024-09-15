@@ -10,6 +10,7 @@ function Following() {
             <FollowingItem />
             <FollowingItem />
             <FollowingItem />
+            <FollowingItem />
         </div>
     );
 }
