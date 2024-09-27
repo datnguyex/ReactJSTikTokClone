@@ -4,7 +4,7 @@ import { Wrapper as PopperWrapper } from '~/component/Popper';
 import style from './Menu.module.scss';
 import MenuItem from './MenuItem';
 import Header from './Header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ArrowBottom } from '~/component/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,6 +31,7 @@ function Menu({
     //tao 1 mang chua object chua 1 mang dc dat ten la data
 
     const current = history[history.length - 1];
+
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.Children;
@@ -53,6 +54,10 @@ function Menu({
             );
         });
     };
+
+    useEffect(() => {
+        setHistory([{ data: items }]);
+    }, [items]);
 
     const renderMoreItem = () => {
         return initialValue.map((init, index) => <MenuItem key={index} data={init} className={className} />);

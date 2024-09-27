@@ -20,16 +20,17 @@ const Login = ({ displayLogin }) => {
     const handleForm = useCallback((item) => {
         setForm(item);
     }, []);
+    // console.log('type', type);
 
     const handleSetITEMS = useCallback(() => {
         if (type == 'login') {
             setType('register');
             setITEMS(ListRegister);
-        } else {
+        } else if (type == 'register') {
             setType('login');
             setITEMS(ListLogin);
         }
-    }, []);
+    }, [type]);
 
     return (
         <div className={cx('wrapper')}>

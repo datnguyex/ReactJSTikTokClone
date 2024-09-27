@@ -1,14 +1,16 @@
-import styles from './WriteForm.module.scss';
-import classNames from 'classnames/bind';
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { EyeHiddenIcon, EyeOpenIcon, TickIcon, TriangleIcon, XWordIcon, ArrowLeftIcon } from '~/component/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { ItemsMonth, ItemsDay, ItemsYear } from '~/component/Array';
 import Menu from '~/component/Popper/Menu';
+import axios from 'axios';
+import styles from './WriteForm.module.scss';
+import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 const WriteForm = ({ type, handleTimeout, handleForm }) => {
+    const [listNickName, setListNickName] = useState([]);
     const [valueMonth, setValueMonth] = useState('');
     const [valueDay, setValueDay] = useState('');
     const [valueYear, setValueYear] = useState('');
@@ -18,6 +20,41 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
     const [rotatedIndex, setRotatedIndex] = useState('');
     const [checkClause, setCheckClause] = useState(false);
     const [displayReset, setDisplayReset] = useState(false);
+    const [continueRegis, setContinueRegis] = useState(false);
+    const [valueEmail, setValueEmail] = useState('');
+    const [valuePassWord, setValuePassword] = useState('');
+    const [valueCode, setValueCode] = useState(null);
+    const [checkSwitch, setCheckSwitch] = useState(true);
+    const [option, setOption] = useState('');
+    const [nickNameOption1, setNickNameOption1] = useState('');
+    const [nickNameOption2, setNickNameOption2] = useState('');
+
+    const handleNickNameOption1 = (value) => {
+        setNickNameOption1(value);
+        if (option == 1) {
+            return;
+        } else {
+            setOption(1);
+        }
+    };
+
+    const handleNickNameOption2 = (e) => {
+        setNickNameOption2(e.target.value);
+        if (option == 2) {
+            return;
+        } else {
+            setOption(2);
+        }
+    };
+    const handleValueCode = (e) => {
+        setValueCode(e);
+    };
+    const handleValuePass = (e) => {
+        setValuePassword(e);
+    };
+    const handleValueEmail = (e) => {
+        setValueEmail(e);
+    };
     const handleValueMonth = (value) => {
         setValueMonth(value);
     };
@@ -56,6 +93,40 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
         setDisplayReset(true);
     };
 
+    const handleSendCode = () => {
+        axios
+            .post('http://127.0.0.1:8000/api/sendEmailCreateAccount', {
+                email: valueEmail,
+                code: valueCode,
+            })
+            .then((response) => {
+                console.log('Response:', response.data);
+                if (response.data.message == 'Sent successfully') {
+                    setCheckSwitch('continueRegis');
+                    return setContinueRegis(true);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching search results:', error);
+            });
+    };
+    const fetchNickName = () => {
+        axios
+            .get('http://127.0.0.1:8000/api/suggestNickName', {})
+            .then((response) => {
+                setListNickName(response.data.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching search results:', error);
+            });
+    };
+
+    useEffect(() => {
+        if (checkSwitch == 'continueRegis') {
+            fetchNickName();
+        }
+    }, [checkSwitch]);
+
     return (
         <>
             <div className={cx('content')}>
@@ -75,9 +146,8 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
                 ) : (
                     <></>
                 )}
-
                 {/* sign in */}
-                {type === 'login' && displayReset === false ? (
+                {type === 'login' && continueRegis == false && displayReset === false ? (
                     <>
                         <div className={cx('ChooseLogin')}>
                             <p>Email or username</p>
@@ -99,7 +169,7 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
                         </p>
                         <button className={cx('btn-log')}>Login</button>
                     </>
-                ) : type === 'register' && displayReset === false ? (
+                ) : type === 'register' && continueRegis == false && displayReset === false ? (
                     <>
                         <p className={cx('title-birthday')}>When’s your birthday?</p>
                         <div className={cx('wrap-conten__birthday')}>
@@ -184,10 +254,18 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
                             <p>Email</p>
                             <p className={cx('text-ChooseLogin')}>Let’s get started!</p>
                         </div>
-                        <input placeholder="Email" className={cx('input-ChooseLogin')} />
+                        <input
+                            onChange={(e) => {
+                                handleValueEmail(e.target.value);
+                            }}
+                            placeholder="Email"
+                            className={cx('input-ChooseLogin')}
+                        />
                         <div className={cx('Wrap__input-ChooseLogin')}>
                             <input
-                                onChange={handleSetValue}
+                                onChange={(e) => {
+                                    handleValuePass(e.target.value);
+                                }}
                                 onClick={handleCheckPassHave}
                                 type={hidePass ? 'text' : 'password'}
                                 placeholder="Password"
@@ -198,8 +276,35 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
                             </span>
                         </div>
                         <div className={cx('wrap-digit')}>
-                            <input className={cx('enter-digit')} placeholder="Enter 6-digit code" />
-                            <button className={cx('btn-digit')}>Send code</button>
+                            <input
+                                value={valueCode}
+                                onChange={(e) => handleValueCode(e.target.value)}
+                                className={cx('enter-digit')}
+                                placeholder="Enter 6-digit code"
+                            />
+                            <div
+                                onClick={
+                                    valueDay != '' &&
+                                    valueMonth !== '' &&
+                                    valueYear != '' &&
+                                    valueEmail != '' &&
+                                    valuePassWord != '' &&
+                                    checkClause != false
+                                        ? handleSendCode
+                                        : null
+                                }
+                                className={cx('btn-digit', {
+                                    'textchange-btnDigit':
+                                        valueDay !== '' &&
+                                        valueMonth !== '' &&
+                                        valueYear !== '' &&
+                                        valueEmail !== '' &&
+                                        checkClause === true &&
+                                        valuePassWord !== '',
+                                })}
+                            >
+                                Send code
+                            </div>
                         </div>
                         <div className={cx('wrap__signup-agree')}>
                             <input
@@ -215,9 +320,33 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
                                 to your email
                             </label>
                         </div>
-                        <button className={cx('btn-log')}>Next</button>
+                        <button
+                            onClick={
+                                valueDay != '' &&
+                                valueMonth !== '' &&
+                                valueYear != '' &&
+                                valueEmail != '' &&
+                                valuePassWord != '' &&
+                                valueCode != '' &&
+                                checkClause != false
+                                    ? handleSendCode
+                                    : null
+                            }
+                            className={cx('btn-log', {
+                                'textchange-btnDigit':
+                                    valueDay !== '' &&
+                                    valueMonth !== '' &&
+                                    valueYear !== '' &&
+                                    valueEmail !== '' &&
+                                    checkClause === true &&
+                                    valuePassWord !== '' &&
+                                    valueCode !== null,
+                            })}
+                        >
+                            Next
+                        </button>
                     </>
-                ) : (
+                ) : continueRegis == false && displayReset === true ? (
                     <>
                         {/* resetPass */}
                         <div className={cx('ChooseLogin')}>
@@ -277,12 +406,55 @@ const WriteForm = ({ type, handleTimeout, handleForm }) => {
                         )}
                         <button className={cx('btn-log')}>Login</button>
                     </>
+                ) : (
+                    <></>
                 )}
-
                 {/* sign up */}
+                {/* continueRegis */}
+                {continueRegis == true ? (
+                    <>
+                        <p className={cx('title-birthday')}>Create TikTok ID</p>
+                        <div className={cx('Wrap__input-ChooseLogin')}>
+                            <Menu
+                                // placement="start-bottom"
+                                getValue={handleNickNameOption1}
+                                hideOnClick
+                                className="chooseIDItem"
+                                items={listNickName}
+                                start={0}
+                                end={0}
+                            >
+                                <input
+                                    onChange={(e) => handleNickNameOption2(e)}
+                                    value={option == 1 ? nickNameOption1 : nickNameOption2}
+                                    onMouseLeave={handleRotateLeave}
+                                    onMouseEnter={() => handleRotate(1)}
+                                    className={cx('chooseIDItem')}
+                                ></input>
+                            </Menu>
+                        </div>
+                        <p className={cx('birthday-suggest')}>you can always change this later.</p>
+                        <button className={cx('btn-log')}>Sign Up</button>
+                        <button className={cx('btn-skip')}>
+                            <h1>skip</h1>
+                        </button>
+                    </>
+                ) : (
+                    <></>
+                )}
             </div>
+            {/* continueRegis */}
+            {continueRegis == true ? (
+                <div className={cx('nextRegisterHave')}>
+                    <p>Already have an account</p>
+                    <a className={cx('text-nextRegisterHave')}>Log in</a>
+                </div>
+            ) : (
+                <></>
+            )}
+
             {/* sign up */}
-            {type == 'register' ? (
+            {type == 'register' && continueRegis == false ? (
                 <>
                     {' '}
                     <p className={cx('login-terms')}>
