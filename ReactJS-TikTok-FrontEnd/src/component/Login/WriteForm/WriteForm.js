@@ -242,6 +242,8 @@ const WriteForm = ({ type, handleSetITEMS, handleTimeout, handleForm, handleUser
                 {type === 'login' && continueRegis == false && displayReset === false ? (
                     <>
                         <LoginForm
+                            valueEmail={valueEmail}
+                            valuePassWord={valuePassWord}
                             handleValueEmail={handleValueEmail}
                             handleValuePass={handleValuePass}
                             hidePass={hidePass}
@@ -278,6 +280,9 @@ const WriteForm = ({ type, handleSetITEMS, handleTimeout, handleForm, handleUser
                     <>
                         {/* resetPass */}
                         <ResetPassword
+                            valueEmail={valueEmail}
+                            password={password}
+                            valueCode={valueCode}
                             handleValueEmail={handleValueEmail}
                             handleValueCode={handleValueCode}
                             handleSendCodeResetPassword={handleSendCodeResetPassword}
@@ -287,7 +292,7 @@ const WriteForm = ({ type, handleSetITEMS, handleTimeout, handleForm, handleUser
                             handleSetHidePass={handleSetHidePass}
                             handleSubmitResetPassword={handleSubmitResetPassword}
                         ></ResetPassword>
-                        {checkPassHave == true ? (
+                        {/* {checkPassHave == true ? (
                             <>
                                 <p classNames={cx('title-passHave')}>Your password must have </p>
                                 <div
@@ -313,7 +318,7 @@ const WriteForm = ({ type, handleSetITEMS, handleTimeout, handleForm, handleUser
                             </>
                         ) : (
                             <></>
-                        )}
+                        )} */}
                     </>
                 ) : (
                     <></>

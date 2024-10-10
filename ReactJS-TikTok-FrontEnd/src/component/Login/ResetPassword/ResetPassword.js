@@ -13,8 +13,14 @@ function ResetPassword({
     handleCheckPassHave,
     hidePass,
     handleSetHidePass,
+    valueEmail,
+    password,
+    valueCode,
     handleSubmitResetPassword,
 }) {
+    console.log('valueEmail', valueEmail);
+    console.log('valuepass', password);
+    console.log('valuecode', valueCode);
     return (
         <>
             <div className={cx('ChooseLogin')}>
@@ -58,7 +64,12 @@ function ResetPassword({
                         <EyeOpenIcon />
                     </span>
                 )}
-                <button onClick={handleSubmitResetPassword} className={cx('btn-log')}>
+                <button
+                    onClick={handleSubmitResetPassword}
+                    className={cx('btn-log', {
+                        'btn-log__value': valueEmail != '' && password != '' && valueCode != '',
+                    })}
+                >
                     Login
                 </button>
             </div>

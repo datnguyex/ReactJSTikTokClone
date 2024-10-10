@@ -39,8 +39,8 @@ import MenuItem from '~';
 const cx = classNames.bind(style);
 
 function Header({ displayLogin, userValue, handleDisPlayLogOut }) {
-    // console.log('displayLogin', displayLogin);
     const currentUser = userValue != null ? true : false;
+
     // console.log('handleDisPlayLogOut', handleDisPlayLogOut);
     const MENU_ITEMS = [
         {
@@ -164,7 +164,7 @@ function Header({ displayLogin, userValue, handleDisPlayLogOut }) {
 
                 {/* action */}
                 <div className={cx('action')}>
-                    {currentUser ? (
+                    {currentUser == true ? (
                         <>
                             <Tippy interactive content="Upload Video" placement="bottom" delay={[0, 100]}>
                                 <Link to={config.routes.upload} className={cx('action-btn')}>
@@ -215,19 +215,19 @@ function Header({ displayLogin, userValue, handleDisPlayLogOut }) {
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
                             currentUser == null ? (
-                                <Image
+                                <img
                                     className={cx('user-avatar')}
                                     src="hhttps://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/e2a0d34d71940773067459da2d4ef05d~c5_300x300.webp?lk3s=a5d48078&nonce=67418&refresh_token=b050ff2457c9baa1916584f9bb9d2439&x-expires=1723644000&x-signature=ugdf4Cf6W%2BsTRHLfXb7LlavS10g%3D&shp=a5d48078&shcp=c1333099"
                                     alt="CaoCuongVu"
                                     fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
-                                ></Image>
+                                ></img>
                             ) : (
-                                <Image
+                                <img
                                     className={cx('user-avatar')}
                                     src={`http://127.0.0.1:8000/storage/${userValue.image}`}
                                     alt="CaoCuongVu"
                                     fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
-                                ></Image>
+                                ></img>
                             )
                         ) : (
                             <button className={cx('more-btn')}>

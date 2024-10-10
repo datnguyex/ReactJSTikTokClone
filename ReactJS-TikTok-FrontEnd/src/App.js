@@ -11,7 +11,7 @@ import { Fragment, useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 
 function App() {
-    const [userValue, setUserValue] = useState(null);
+    const [userValue, setUserValue] = useState();
     const [displayLogin, setDisplayLogin] = useState(false);
     const [showUpdate, setShowUpdate] = useState(false);
     const [commentVideo, setCommentVideo] = useState(null);

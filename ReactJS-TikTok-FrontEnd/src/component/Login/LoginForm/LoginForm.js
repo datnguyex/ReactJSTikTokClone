@@ -13,6 +13,8 @@ function loginForm({
     handleSetHidePass,
     handleDisplayReset,
     handleSubmitLogin,
+    valueEmail,
+    valuePassWord,
 }) {
     return (
         <>
@@ -43,7 +45,12 @@ function loginForm({
             <p onClick={handleDisplayReset} className={cx('text-forgot')}>
                 Forgot password?
             </p>
-            <button onClick={handleSubmitLogin} className={cx('btn-log')}>
+            <button
+                className={cx('btn-log', {
+                    'btn-log__value': valueEmail != '' && valuePassWord != '',
+                })}
+                onClick={handleSubmitLogin}
+            >
                 Login
             </button>
         </>

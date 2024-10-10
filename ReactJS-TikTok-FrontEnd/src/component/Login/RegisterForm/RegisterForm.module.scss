@@ -144,16 +144,6 @@
     align-items: center;
     cursor: not-allowed;
 }
-.textchange-btnDigit {
-    color: black;
-    cursor: pointer;
-}
-.title-passHave {
-    color: rgb(22, 24, 35);
-
-    font-weight: 600;
-    margin: 4px 0px;
-}
 .btn-log {
     border: none;
     color: rgba(22, 24, 35, 0.34);
@@ -169,4 +159,19 @@
     align-items: center;
     padding: 6px 8px;
     margin-top: 21px;
+}
+
+.textchange-btnDigit {
+    color: black;
+    cursor: pointer;
+}
+.textchange-btnDigitzz {
+    color: red;
+    cursor: pointer;
+}
+.title-passHave {
+    color: rgb(22, 24, 35);
+
+    font-weight: 600;
+    margin: 4px 0px;
 }
