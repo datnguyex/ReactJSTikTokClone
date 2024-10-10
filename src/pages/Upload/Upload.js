@@ -5,11 +5,12 @@ import UploadItem from '~/pages/upload/UploadItem';
 import { PlayIcon, UserIcon } from '~/component/Icons';
 import { useRef, useState } from 'react';
 const cx = classNames.bind(style);
-function Upload() {
+function Upload({ userValue }) {
+    console.log('userValue', userValue);
     return (
         <div className={cx('wrapper')}>
             <Sidebar />
-            <UploadItem />
+            <UploadItem userValue={userValue} />
         </div>
     );
 }

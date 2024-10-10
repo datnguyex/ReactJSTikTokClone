@@ -35,7 +35,13 @@ function DescribeUpload({
     handleShowMore,
     showMore,
     checkboxStyle,
+    handleUpLoadVideo,
+    handleDescription,
+    description,
+    userValue,
 }) {
+    console.log('description', description);
+    console.log('handleUpLoadVideo', handleUpLoadVideo);
     return (
         <div className={cx('wrapGet__info-video')}>
             <div className={cx('get__info-video', 'info-video__divide')}>
@@ -43,6 +49,7 @@ function DescribeUpload({
                     <p className={cx('description-video')}>Description</p>
                     <div className={cx('wrap__textarea-username')}>
                         <textarea
+                            onChange={(e) => handleDescription(e)}
                             placeholder="Share more about your video here"
                             className={cx('textarea-username')}
                         ></textarea>
@@ -232,16 +239,16 @@ function DescribeUpload({
                             </div>
                         </div>
                         <div className={cx('infor-video')}>
-                            <h3 className={cx('nickname')}>thaybetone</h3>
+                            <h3 className={cx('nickname')}>{userValue.full_name}</h3>
                             <div className={cx('des')}>
                                 <p className={cx('name')}>
-                                    Vẫn là quả beat thế giới của SlimV #tiktokfconline #fconline #ATSH
+                                    {description == null ? 'lets describe your video' : description}
                                 </p>
                             </div>
                             <div className={cx('sound')}>
                                 {/* <span className={cx('sound-icon')}>{<SoundIcon />}</span> */}
                                 {/* <span className={cx('space')}>.</span> */}
-                                <span className={cx('sound-info')}>Nhạc nền - No Music No Life</span>
+                                <span className={cx('sound-info')}>Nhạc nền - {userValue.full_name}</span>
                             </div>
                         </div>
                     </div>
@@ -249,7 +256,9 @@ function DescribeUpload({
             </div>
             <div className={cx('line-bottom')}></div>
             <div className={cx('wrap-btn__bottom')}>
-                <button className={cx('wrap-post__bottom')}>Post</button>
+                <button onClick={handleUpLoadVideo} className={cx('wrap-post__bottom')}>
+                    Post
+                </button>
                 <button className={cx('wrap-discard__bottom')}>Discard</button>
             </div>
         </div>

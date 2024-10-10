@@ -2,23 +2,30 @@ import classNames from 'classnames/bind';
 import style from './PersonalVideos.module.scss';
 import video from '~/assets/video';
 import { PlayIcon, UserIcon } from '~/component/Icons';
-import { useRef, useState, memo } from 'react';
+import { useRef, memo } from 'react';
+
 const cx = classNames.bind(style);
-function PersonalVideos({ children }) {
+
+function PersonalVideos({ children, videosPublic }) {
     const videoRef = useRef([]);
+
     const handleSetPlay = (index) => {
         videoRef.current[index].play();
     };
+
     const handleSetOff = (index) => {
         videoRef.current[index].pause();
     };
+
     const setRef = (index) => (el) => {
         videoRef.current[index] = el;
     };
 
+    console.log('videosPublic', videosPublic);
+
     return (
         <>
-            {children == 'Favorites' ? (
+            {children === 'Favorites' ? (
                 <div className={cx('personal-videos')}>
                     {Array.from({ length: 5 }).map((_, index) => (
                         <div key={index} className={cx('video-container')}>
@@ -31,7 +38,26 @@ function PersonalVideos({ children }) {
                                 controls
                                 className={cx('Pervideo')}
                                 src={video.video2}
-                            ></video>
+                            />
+                            <div className={cx('wrap-view')}>
+                                <span className={cx('icon-video')}>
+                                    <PlayIcon />
+                                </span>
+                                <strong className={cx('view-video')}>1.3M</strong>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ) : children === 'Videos' ? (
+                <div className={cx('personal-videos')}>
+                    {videosPublic.map((videoItem, index) => (
+                        <div key={index} className={cx('video-container')}>
+                            <video
+                                type="video/mp4"
+                                controls
+                                className={cx('Pervideo')}
+                                src={`http://127.0.0.1:8000/storage/${videoItem.path}`}
+                            />
                             <div className={cx('wrap-view')}>
                                 <span className={cx('icon-video')}>
                                     <PlayIcon />

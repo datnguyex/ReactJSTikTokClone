@@ -1,0 +1,62 @@
+.title-birthday {
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 22px;
+    margin-bottom: 4px;
+}
+.Wrap__input-ChooseLogin {
+    position: relative;
+}
+.chooseIDItem {
+    width: 100%;
+    height: 44px;
+    padding: 0px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(22, 24, 35);
+    font-size: 1.6rem;
+    background: rgba(22, 24, 35, 0.06);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+}
+.chooseIDItem::placeholder {
+    color: rgb(22, 24, 35);
+}
+.birthday-suggest {
+    color: rgba(22, 24, 35, 0.5);
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+.btn-log {
+    border: none;
+    color: rgba(22, 24, 35, 0.34);
+    background-color: rgba(22, 24, 35, 0.06);
+    width: 100%;
+    min-height: 46px;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 600;
+    font-family: TikTokFont, PingFangSC, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 8px;
+    margin-top: 21px;
+}
+.btn-skip {
+    font-size: 2rem;
+    color: rgb(22, 24, 35);
+    background-color: transparent;
+    border-color: transparent;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}

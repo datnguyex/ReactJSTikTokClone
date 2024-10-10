@@ -11,18 +11,27 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import images from '~/assets/images';
-
+import axios from 'axios';
 const cx = classNames.bind(style);
-function UploadItem() {
+function UploadItem({ userValue }) {
     const [video, setVideo] = useState(null);
+    const [videoSubmit, setVideoSubmit] = useState(null);
     const [showCopyCheck, setShowCopyCheck] = useState(false);
     const [showMore, setShowMore] = useState(false);
+    const [description, setdescription] = useState('');
     const [infoVideo, setInfoVideo] = useState({
         duration: 0,
         size: 0,
         name: '',
     });
+    console.log('videoSubmit', videoSubmit);
+    console.log('des', description);
+    // console.log('id', userValue.id);
+
     const [valueWatch, setValueWatch] = useState('Only you');
+    const handleDescription = (e) => {
+        setdescription(e.target.value);
+    };
     const handleGetVideo = (e) => {
         const file = e.target.files[0];
 
@@ -31,6 +40,7 @@ function UploadItem() {
             const url = URL.createObjectURL(file);
             videoElement.src = url;
             setVideo(url);
+            setVideoSubmit(file);
 
             videoElement.onloadedmetadata = () => {
                 const durationInSeconds = Math.round(videoElement.duration);
@@ -50,6 +60,23 @@ function UploadItem() {
             }));
         } else {
             alert('khong tim thay video');
+        }
+    };
+    const handleUpLoadVideo = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append('video', videoSubmit);
+        formData.append('user_id', userValue.id);
+        formData.append('description', description);
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/uploadVideo', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('Video uploaded successfully:', response.data);
+        } catch (error) {
+            console.error('Error uploading video:', error);
         }
     };
     const toggelStyle = {
@@ -77,6 +104,9 @@ function UploadItem() {
                 <UploadVideo handleGetVideo={handleGetVideo} />
             ) : (
                 <UpLoadSetting
+                    handleDescription={handleDescription}
+                    description={description}
+                    handleUpLoadVideo={handleUpLoadVideo}
                     showCopyCheck={showCopyCheck}
                     showMore={showMore}
                     valueWatch={valueWatch}
@@ -89,6 +119,7 @@ function UploadItem() {
                     infoVideo={infoVideo}
                     handleValueWatch={handleValueWatch}
                     manage_items={manage_items}
+                    userValue={userValue}
                 />
             )}
 

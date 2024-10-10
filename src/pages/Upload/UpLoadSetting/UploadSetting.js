@@ -28,6 +28,10 @@ const UploadSetting = ({
     showMore,
     showCopyCheck,
     handleValueWatch,
+    handleUpLoadVideo,
+    handleDescription,
+    description,
+    userValue,
 }) => {
     return (
         <>
@@ -36,6 +40,10 @@ const UploadSetting = ({
             {<InfoSetting manage_items={manage_items} handleValueWatch={handleValueWatch} infoVideo={infoVideo} />}
             {
                 <DescribeUpload
+                    userValue={userValue}
+                    handleDescription={handleDescription}
+                    description={description}
+                    handleUpLoadVideo={handleUpLoadVideo}
                     video={video}
                     handleValueWatch={handleValueWatch}
                     watch_items={watch_items}

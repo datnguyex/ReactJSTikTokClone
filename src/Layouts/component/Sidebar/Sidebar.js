@@ -16,8 +16,8 @@ import {
 import { memo, useEffect, useState } from 'react';
 const cx = classNames.bind(style);
 
-const currentUser = true;
-function Sidebar() {
+function Sidebar({ userValue }) {
+    const currentUser = userValue != null ? true : false;
     const [mouseEnter, setmouseEnter] = useState(false);
 
     return (

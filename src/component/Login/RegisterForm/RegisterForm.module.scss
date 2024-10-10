@@ -1,0 +1,172 @@
+.title-birthday {
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 22px;
+    margin-bottom: 4px;
+}
+.wrap-conten__birthday {
+    display: flex;
+    margin-bottom: 4px;
+}
+
+.birthday-item {
+    width: 115px;
+    height: 44px;
+    padding: 0px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(22, 24, 35, 0.34);
+    font-size: 1.6rem;
+    background: rgba(22, 24, 35, 0.06);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+}
+.birthday-item + .birthday-item {
+    margin-left: 8px;
+}
+.birthday-suggest {
+    color: rgba(22, 24, 35, 0.5);
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+.birthday-item__icon {
+    color: rgb(22, 24, 35);
+}
+.rotate-icon {
+    transform: rotateZ(180deg);
+    transition: transform 0.3s;
+}
+.notRotate {
+    transform: rotateZ(0deg);
+    transition: transform 0.3s;
+}
+.wrap__signup-agree {
+    margin-bottom: 16px;
+    display: flex;
+    position: relative;
+}
+.check__signup-agree {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.check-success {
+    background: rgb(254, 44, 85) !important;
+    border: 1px solid rgb(254, 44, 85) !important;
+}
+.icon_signup_clause {
+    cursor: pointer;
+    left: 0px;
+    top: 0;
+    position: absolute;
+}
+.text__signup-agree {
+    margin-left: 6px;
+    color: rgba(22, 24, 35, 0.75);
+    font-family: TikTokFont, PingFangSC, sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    display: inline;
+}
+.ChooseLogin {
+    color: rgb(22, 24, 35);
+    font-weight: 500;
+    font-size: 1.5rem;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 9px;
+}
+.Wrap__input-ChooseLogin {
+    position: relative;
+}
+.iconPass {
+    position: absolute;
+    cursor: pointer;
+    top: calc(50% - 15px);
+    right: 5%;
+}
+.input-ChooseLogin {
+    border-radius: 2px;
+    background-color: rgba(22, 24, 35, 0.06);
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    color: rgb(22, 24, 35);
+    line-height: 100%;
+    outline: none;
+    padding-inline-start: 12px;
+    font-size: 1.6rem;
+    height: 44px;
+    caret-color: rgb(254, 44, 85);
+    width: 100%;
+    margin-bottom: 9px;
+}
+
+.value-Have {
+    color: rgb(22, 24, 35) !important;
+}
+.wrap-digit {
+    display: flex;
+    justify-content: space-between;
+}
+.enter-digit {
+    padding-inline-start: 12px;
+    margin-bottom: 9px;
+    flex: 1 1 0%;
+    width: 0px;
+    height: 47px;
+    border-radius: 4px 0px 0px 4px;
+    background-color: rgba(22, 24, 35, 0.06);
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    color: rgb(22, 24, 35);
+    line-height: 100%;
+    outline: none;
+    font-size: 1.6rem;
+    height: 44px;
+    caret-color: rgb(254, 44, 85);
+}
+.btn-digit {
+    color: rgba(22, 24, 35, 0.34);
+    border-radius: 0px 4px 4px 0px;
+    border: 1.5px solid rgba(22, 24, 35, 0.12);
+    background-color: rgba(22, 24, 35, 0.06);
+    font-family: TikTokFont, PingFangSC, sans-serif;
+    font-weight: 500;
+    height: 44px;
+    padding: 0px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: not-allowed;
+}
+.textchange-btnDigit {
+    color: black;
+    cursor: pointer;
+}
+.title-passHave {
+    color: rgb(22, 24, 35);
+
+    font-weight: 600;
+    margin: 4px 0px;
+}
+.btn-log {
+    border: none;
+    color: rgba(22, 24, 35, 0.34);
+    background-color: rgba(22, 24, 35, 0.06);
+    width: 100%;
+    min-height: 46px;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 600;
+    font-family: TikTokFont, PingFangSC, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 8px;
+    margin-top: 21px;
+}

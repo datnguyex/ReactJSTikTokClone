@@ -1,12 +1,12 @@
-import styles from './Login.module.scss';
-import classNames from 'classnames/bind';
 import { useState, useCallback } from 'react';
 import Listform from '~/component/Login/Listform';
 import WriteForm from '~/component/Login/WriteForm';
 import { ListLogin, ListRegister } from '~/component/Array';
 import { XWordIcon } from '~/component/Icons';
+import classNames from 'classnames/bind';
+import styles from './Login.module.scss';
 const cx = classNames.bind(styles);
-const Login = ({ displayLogin }) => {
+const Login = ({ displayLogin, handleUserValue }) => {
     const [nameClass, setNameClass] = useState(true);
     const [type, setType] = useState('login');
     const [ITEMS, setITEMS] = useState(ListLogin);
@@ -20,7 +20,6 @@ const Login = ({ displayLogin }) => {
     const handleForm = useCallback((item) => {
         setForm(item);
     }, []);
-    // console.log('type', type);
 
     const handleSetITEMS = useCallback(() => {
         if (type == 'login') {
@@ -32,11 +31,18 @@ const Login = ({ displayLogin }) => {
         }
     }, [type]);
 
+    console.log('type', type);
     return (
         <div className={cx('wrapper')}>
             <div className={cx(nameClass == true ? 'wrap-content' : 'hidden')}>
                 {form == 'login' || form == 'register' ? (
-                    <WriteForm handleForm={handleForm} handleTimeout={handleTimeout} type={type} />
+                    <WriteForm
+                        handleSetITEMS={handleSetITEMS}
+                        handleForm={handleForm}
+                        handleTimeout={handleTimeout}
+                        type={type}
+                        handleUserValue={handleUserValue}
+                    />
                 ) : (
                     <>
                         <span onClick={handleTimeout} className={cx('close-btn')}>

@@ -11,20 +11,29 @@ import video from '~/assets/video';
 import { useCallback } from 'react';
 const cx = classNames.bind(style);
 
-function Profile({ handleSetUpdate, showUpdate }) {
+function Profile({ userValue, handleSetUpdate, showUpdate }) {
     const [selected, setSelected] = useState('Videos');
     const [type, setType] = useState('Lates');
+    const [videosPublic, setVideoPublic] = useState([]);
     const handleSelected = (value) => {
         setSelected(value);
     };
     const handleType = (value) => {
         setType(value);
     };
-
+    const handVideosPublic = (item) => {
+        setVideoPublic(item);
+    };
+    console.log('videosPublic', videosPublic);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
-                <InfoProfile handleSetUpdate={handleSetUpdate} showUpdate={showUpdate} />
+                <InfoProfile
+                    handVideosPublic={handVideosPublic}
+                    userValue={userValue}
+                    handleSetUpdate={handleSetUpdate}
+                    showUpdate={showUpdate}
+                />
                 <div className={cx('personal-content')}>
                     <div className={cx('control')}>
                         <p
@@ -82,7 +91,7 @@ function Profile({ handleSetUpdate, showUpdate }) {
                     component nay
                 */}
 
-                <PersonalVideos>{selected}</PersonalVideos>
+                <PersonalVideos videosPublic={videosPublic}>{selected}</PersonalVideos>
             </div>
         </div>
     );

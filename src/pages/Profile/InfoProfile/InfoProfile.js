@@ -4,8 +4,10 @@ import Button from '~/component/Button';
 import Menu from '~/component/Popper/Menu';
 import 'tippy.js/dist/tippy.css';
 import { InfoProfileItems } from '~/component/Array';
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Image } from '~/component/Image';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import {
     ShareSolidIcon,
@@ -24,20 +26,49 @@ import {
     LineIcon,
     PinteresIcon,
 } from '~/component/Icons';
+import UserInfo from '~';
 const cx = classNames.bind(style);
 
-function InfoProfile({ handleSetUpdate, showUpdate }) {
+function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic }) {
+    const { nickname } = useParams();
+
+    const [nicknameParam, setNicknammeParam] = useState(nickname);
+    const [profileOf, setProfileOf] = useState('');
+    const [infoUser, setInfoUser] = useState('');
+
+    const checkProfile = () => {
+        if (userValue == null) {
+            return;
+        }
+        const nicknameToFetch = nicknameParam === userValue.nickname ? userValue.nickname : nicknameParam;
+        nicknameParam === userValue.nickname ? setProfileOf('user') : setProfileOf('other');
+        axios
+            .post('http://127.0.0.1:8000/api/getUserInfo', { nickname: nicknameToFetch }) // Wrap in an object
+            .then((response) => {
+                setInfoUser(response.data.data);
+                handVideosPublic(response.data.videos);
+            })
+            .catch((error) => {
+                console.error('Error fetching user data:', error.response ? error.response.data : error.message); // More detailed error
+            });
+    };
+
+    useEffect(() => {
+        checkProfile();
+    }, [userValue]);
     return (
         <>
             <div className={cx('info')}>
-                <Image
-                    className={cx('img')}
-                    alt=""
-                    src="https://th.bing.com/th/id/OIP.pegfGc8sWHh2_RuwiuAknwHaHZ?rs=1&pid=ImgDetMain"
-                ></Image>
+                {infoUser == null ? (
+                    <>
+                        <img className={cx('img')} alt="" src={`http://127.0.0.1:8000/storage/${userValue.image}`} />
+                    </>
+                ) : (
+                    <img className={cx('img')} alt="" src={`http://127.0.0.1:8000/storage/${infoUser.image}`} />
+                )}
                 <div className={cx('text-info')}>
                     <h1 className={cx('wrap-nickname')}>
-                        <p className={cx('nickname')}>nguynt6493</p>
+                        <p className={cx('nickname')}>{infoUser == null ? userValue.nickname : infoUser.nickname}</p>
 
                         <Menu
                             seeMore={true}
@@ -50,13 +81,13 @@ function InfoProfile({ handleSetUpdate, showUpdate }) {
                             </span>
                         </Menu>
                     </h1>
-                    <h2 className={cx('name')}>Nguyễn Đạt</h2>
+                    <h2 className={cx('name')}>{infoUser == null ? userValue.full_name : infoUser.full_name}</h2>
 
                     {/* <button className={cx('btn-info')}>
-                            <WriteIcon />
+                                <WriteIcon />
 
-                            <span>Edit profile</span>
-                        </button> */}
+                                <span>Edit profile</span>
+                            </button> */}
                     <div className={cx('wrap-btnInfo')}>
                         <Button onClick={handleSetUpdate} className={cx('btn-info')} leftIcon={<WriteIcon />}>
                             Edit profile
@@ -66,20 +97,26 @@ function InfoProfile({ handleSetUpdate, showUpdate }) {
             </div>
             <div className={cx('statistics')}>
                 <div className={cx('stats')}>
-                    <strong className={cx('title-numb')}>64</strong>
+                    <strong className={cx('title-numb')}>
+                        {infoUser == null ? userValue.followings_count : infoUser.followings_count}
+                    </strong>
                     <span className={cx('title-stats')}>Following</span>
                 </div>
                 <div className={cx('stats')}>
-                    <strong className={cx('title-numb')}>1.5M</strong>
+                    <strong className={cx('title-numb')}>
+                        {infoUser == null ? userValue.followings_count : infoUser.followings_count}
+                    </strong>
                     <span className={cx('title-stats')}>Follower</span>
                 </div>
                 <h3 className={cx('stats')}>
-                    <strong className={cx('title-numb')}>56.4M</strong>
+                    <strong className={cx('title-numb')}>
+                        {infoUser == null ? userValue.followings_count : infoUser.likes_count}
+                    </strong>
                     <span className={cx('title-stats')}>Liked</span>
                 </h3>
             </div>
 
-            <h2 className={cx('introduce')}>FB: Nguyen Anh Tu (Bin Yet).</h2>
+            <h2 className={cx('introduce')}>{infoUser == null ? userValue.bio : infoUser.bio}</h2>
         </>
     );
 }

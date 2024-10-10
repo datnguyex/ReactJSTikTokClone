@@ -1,0 +1,67 @@
+.ChooseLogin {
+    color: rgb(22, 24, 35);
+    font-weight: 500;
+    font-size: 1.5rem;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 9px;
+}
+.input-ChooseLogin {
+    border-radius: 2px;
+    background-color: rgba(22, 24, 35, 0.06);
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    color: rgb(22, 24, 35);
+    line-height: 100%;
+    outline: none;
+    padding-inline-start: 12px;
+    font-size: 1.6rem;
+    height: 44px;
+    caret-color: rgb(254, 44, 85);
+    width: 100%;
+    margin-bottom: 9px;
+}
+.iconPass {
+    color: rgb(131 132 138);
+    cursor: pointer;
+    right: 0px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    height: 44px;
+    padding-inline-end: 16px;
+}
+.text-forgot {
+    cursor: pointer;
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 500;
+    font-size: 1.2rem;
+    display: inline-block;
+}
+.btn-log {
+    border: none;
+    color: rgba(22, 24, 35, 0.34);
+    background-color: rgba(22, 24, 35, 0.06);
+    width: 100%;
+    min-height: 46px;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 600;
+    font-family: TikTokFont, PingFangSC, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 8px;
+    margin-top: 21px;
+}
+.Wrap__input-ChooseLogin {
+    position: relative;
+}
+.iconPass {
+    position: absolute;
+    cursor: pointer;
+    top: calc(50% - 25px);
+    right: 1%;
+}

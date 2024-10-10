@@ -13,9 +13,18 @@ function MenuItem({ className, data, onClick, getValue = '' }) {
     });
 
     const classes2 = className;
+
     return (
         <Button
-            onClick={getValue ? () => getValue(data.title) : onClick}
+            onClick={() => {
+                if (getValue) {
+                    getValue(data.title);
+                } else if (data.handleClick) {
+                    data.handleClick(data.title); // Gọi đúng hàm
+                } else if (onClick) {
+                    onClick(data.title);
+                }
+            }}
             className2={classes2}
             className={classes}
             leftIcon={data.icon}

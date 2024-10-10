@@ -8,7 +8,7 @@ import Button from '~/component/Button';
 import { useEffect } from 'react';
 const cx = classNames.bind(style);
 
-function DefaultLayout({ children, displayLogin }) {
+function DefaultLayout({ children, displayLogin, userValue, handleDisPlayLogOut }) {
     const scrollAmount = 900;
 
     return (
@@ -16,9 +16,9 @@ function DefaultLayout({ children, displayLogin }) {
             <Button className={cx('btn-get')} small rounded>
                 Get app
             </Button>
-            <Header displayLogin={displayLogin} />
+            <Header handleDisPlayLogOut={handleDisPlayLogOut} userValue={userValue} displayLogin={displayLogin} />
             <div className={cx('container')}>
-                <Sidebar />
+                <Sidebar userValue={userValue} />
                 <div className={cx('content')}>{children}</div>
             </div>
         </div>

@@ -1,28 +1,61 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes, privateRoutes } from '~/routes';
 import Login from '~/component/Login';
+import LogOut from '~/component/LogOut';
 import Comment from '~/component/Comment';
 import './App.css';
 import UpdateProfile from '~/component/UpdateProfile';
 // import { DefaultLayout } from '~/Layouts';
 import DefaultLayout from '~/Layouts';
 import { Fragment, useEffect, useState, useCallback } from 'react';
+import axios from 'axios';
 
 function App() {
+    const [userValue, setUserValue] = useState(null);
     const [displayLogin, setDisplayLogin] = useState(false);
     const [showUpdate, setShowUpdate] = useState(false);
     const [commentVideo, setCommentVideo] = useState(null);
+    const [displayLogOut, setDisPlayLogOut] = useState(false);
 
     const handleSetUpdate = () => {
         setShowUpdate(!showUpdate);
     };
+
     const handleDisplayLogin = () => {
         setDisplayLogin(!displayLogin);
     };
     const handleCommentVideo = (item) => {
         setCommentVideo(item);
     };
-
+    const handleUserValue = (item) => {
+        setUserValue(item);
+    };
+    const handleDisPlayLogOut = () => {
+        setDisPlayLogOut(!displayLogOut);
+    };
+    const fetchUserValue = () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            axios
+                .get('http://127.0.0.1:8000/api/user', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    withCredentials: true,
+                })
+                .then((response) => {
+                    setUserValue(response.data.data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching user data:', error);
+                });
+        } else {
+            return;
+        }
+    };
+    useEffect(() => {
+        fetchUserValue();
+    }, []);
     return (
         <Router>
             <Routes>
@@ -42,10 +75,25 @@ function App() {
                             path={route.path}
                             element={
                                 <div className="app-wrap">
-                                    <Layout displayLogin={handleDisplayLogin}>
+                                    <Layout
+                                        handleDisPlayLogOut={handleDisPlayLogOut}
+                                        userValue={userValue}
+                                        displayLogin={handleDisplayLogin}
+                                    >
                                         <>
+                                            {displayLogOut == true ? (
+                                                <LogOut
+                                                    handleUserValue={handleUserValue}
+                                                    handleDisPlayLogOut={handleDisPlayLogOut}
+                                                ></LogOut>
+                                            ) : (
+                                                <></>
+                                            )}
                                             {displayLogin == true ? (
-                                                <Login displayLogin={handleDisplayLogin}></Login>
+                                                <Login
+                                                    handleUserValue={handleUserValue}
+                                                    displayLogin={handleDisplayLogin}
+                                                ></Login>
                                             ) : (
                                                 <></>
                                             )}
@@ -58,14 +106,23 @@ function App() {
                                                 <></>
                                             )}
                                             {showUpdate == true ? (
-                                                <UpdateProfile showUpdate={showUpdate} onClick={handleSetUpdate} />
+                                                <UpdateProfile
+                                                    handleUserValue={handleUserValue}
+                                                    userValue={userValue}
+                                                    showUpdate={showUpdate}
+                                                    onClick={handleSetUpdate}
+                                                />
                                             ) : (
                                                 <></>
                                             )}
                                             {route.path == '/:nickname' ? (
-                                                <Page handleSetUpdate={handleSetUpdate} showUpdate={showUpdate} />
+                                                <Page
+                                                    userValue={userValue}
+                                                    handleSetUpdate={handleSetUpdate}
+                                                    showUpdate={showUpdate}
+                                                />
                                             ) : (
-                                                <Page handleCommentVideo={handleCommentVideo} />
+                                                <Page userValue={userValue} handleCommentVideo={handleCommentVideo} />
                                             )}
                                         </>
                                     </Layout>

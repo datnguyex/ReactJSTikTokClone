@@ -38,9 +38,10 @@ import MenuItem from '~';
 
 const cx = classNames.bind(style);
 
-const currentUser = false;
-function Header({ displayLogin }) {
+function Header({ displayLogin, userValue, handleDisPlayLogOut }) {
     // console.log('displayLogin', displayLogin);
+    const currentUser = userValue != null ? true : false;
+    // console.log('handleDisPlayLogOut', handleDisPlayLogOut);
     const MENU_ITEMS = [
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
@@ -131,7 +132,7 @@ function Header({ displayLogin }) {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: config.routes.profile,
+            to: userValue ? `${userValue.nickname}` : null,
         },
         {
             icon: <FontAwesomeIcon icon={faCoins} />,
@@ -147,7 +148,7 @@ function Header({ displayLogin }) {
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log out ',
-            to: '/logout',
+            handleClick: handleDisPlayLogOut,
             separate: true,
         },
     ];
@@ -213,12 +214,21 @@ function Header({ displayLogin }) {
                     {/* menu */}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <Image
-                                className={cx('user-avatar')}
-                                src="hhttps://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/e2a0d34d71940773067459da2d4ef05d~c5_300x300.webp?lk3s=a5d48078&nonce=67418&refresh_token=b050ff2457c9baa1916584f9bb9d2439&x-expires=1723644000&x-signature=ugdf4Cf6W%2BsTRHLfXb7LlavS10g%3D&shp=a5d48078&shcp=c1333099"
-                                alt="CaoCuongVu"
-                                fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
-                            ></Image>
+                            currentUser == null ? (
+                                <Image
+                                    className={cx('user-avatar')}
+                                    src="hhttps://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/e2a0d34d71940773067459da2d4ef05d~c5_300x300.webp?lk3s=a5d48078&nonce=67418&refresh_token=b050ff2457c9baa1916584f9bb9d2439&x-expires=1723644000&x-signature=ugdf4Cf6W%2BsTRHLfXb7LlavS10g%3D&shp=a5d48078&shcp=c1333099"
+                                    alt="CaoCuongVu"
+                                    fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
+                                ></Image>
+                            ) : (
+                                <Image
+                                    className={cx('user-avatar')}
+                                    src={`http://127.0.0.1:8000/storage/${userValue.image}`}
+                                    alt="CaoCuongVu"
+                                    fallback="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
+                                ></Image>
+                            )
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
