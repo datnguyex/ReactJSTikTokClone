@@ -32,3 +32,4 @@ Route::post('updateUser', [UserController::class, 'updateUser']);
 Route::post('sendCodeResetPassword', [UserController::class, 'sendCodeResetPassword']);
 Route::post('uploadVideo', [UserController::class, 'uploadVideo']);
 Route::post('getUserInfo', [UserController::class, 'getUserInfo']);
+Route::get('getAllUser', [UserController::class, 'getAllUser']);

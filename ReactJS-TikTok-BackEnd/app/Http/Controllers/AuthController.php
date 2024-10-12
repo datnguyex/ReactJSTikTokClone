@@ -86,13 +86,15 @@ class AuthController extends Controller
     
     public function register(Request $request) {
 
-        $dob = $request->day . '/' . $request->month . '/' . $request->year;
+        $dob = $request->year . '-' . $request->month . '-' . $request->day;
     
         if($request->nickNameOption1 == "") {
 
             $user = User::create([
                 'email' => $request->input('email'),
                 'nickname' => $request->input('nickNameOption2'),
+                'followings_count'=> 0,
+                'likes_count' => 0,
                 'full_name'=> $request->input('nickNameOption2'),
                 'DOB' => $dob,
                 'password' => Hash::make($request->input('password')),
@@ -105,6 +107,8 @@ class AuthController extends Controller
             $user = User::create([
                 'email' => $request->input('email'),
                 'nickname' => $request->input('nickNameOption1'),
+                'followings_count'=> 0,
+                'likes_count' => 0,
                 'full_name'=> $request->input('nickNameOption1'),
                 'DOB' => $dob,
                 'password' => Hash::make($request->input('password')),

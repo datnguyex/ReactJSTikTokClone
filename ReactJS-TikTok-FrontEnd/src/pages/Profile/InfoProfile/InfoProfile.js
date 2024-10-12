@@ -53,9 +53,13 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic 
             });
     };
 
+    console.log('nicknameParam', nicknameParam);
+    useEffect(() => {
+        setNicknammeParam(nickname);
+    }, [nickname]);
     useEffect(() => {
         checkProfile();
-    }, [userValue]);
+    }, [userValue, nicknameParam]);
     return (
         <>
             <div className={cx('info')}>
@@ -88,11 +92,28 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic 
 
                                 <span>Edit profile</span>
                             </button> */}
-                    <div className={cx('wrap-btnInfo')}>
-                        <Button onClick={handleSetUpdate} className={cx('btn-info')} leftIcon={<WriteIcon />}>
-                            Edit profile
-                        </Button>
-                    </div>
+                    {profileOf == 'user' ? (
+                        <>
+                            <div className={cx('wrap-btnInfo')}>
+                                <Button onClick={handleSetUpdate} className={cx('btn-info')} leftIcon={<WriteIcon />}>
+                                    Edit profile
+                                </Button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className={cx('wrap-btnInfo')}>
+                                <Button
+                                    primary
+                                    className={cx('btn-follow')}
+                                    // leftIcon={<WriteIcon />}
+                                >
+                                    Follow
+                                </Button>
+                                <Button className={cx('btn-info')}>Message</Button>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
             <div className={cx('statistics')}>

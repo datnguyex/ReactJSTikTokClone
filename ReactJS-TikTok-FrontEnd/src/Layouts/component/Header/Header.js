@@ -132,7 +132,7 @@ function Header({ displayLogin, userValue, handleDisPlayLogOut }) {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: userValue ? `${userValue.nickname}` : null,
+            to: userValue ? `/${userValue.nickname}` : null,
         },
         {
             icon: <FontAwesomeIcon icon={faCoins} />,

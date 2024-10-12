@@ -31,7 +31,6 @@ const Login = ({ displayLogin, handleUserValue }) => {
         }
     }, [type]);
 
-    console.log('type', type);
     return (
         <div className={cx('wrapper')}>
             <div className={cx(nameClass == true ? 'wrap-content' : 'hidden')}>

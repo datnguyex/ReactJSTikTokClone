@@ -9,38 +9,41 @@ import { Wrapper as PopperWrapper } from '~/component/Popper';
 import AccountPreview from '~/component/SuggestedAccounts/AccountPreview';
 import { Image } from '~/component/Image';
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
-function AccountItem() {
+function AccountItem({ user }) {
     const rederReview = (props) => (
         <div>
             <div tabIndex="-1" {...props}>
                 <PopperWrapper>
-                    <AccountPreview />
+                    <AccountPreview user={user} />
                 </PopperWrapper>
             </div>
         </div>
     );
+    const navigate = useNavigate();
 
     return (
-        <div>
+        <Link to={`/${user.nickname}`}>
             <HeadlessTippy placement="bottom" delay={[0, 80]} offset={[0, 0]} interactive render={rederReview}>
                 <div className={cx('account-item')}>
-                    <Image
+                    <img
                         className={cx('avatar')}
                         loading="lazy"
                         alt=""
-                        src="https://th.bing.com/th/id/OIP.aQ2-HK9gCw256kym3o0qRgHaHF?rs=1&pid=ImgDetMain"
+                        src={`http://127.0.0.1:8000/storage/${user.image}`}
                     />
                     <div className={cx('item-info')}>
                         <p className={cx('nickName')}>
-                            <span>LongPhh</span>
+                            <span>{user.nickname}</span>
                             <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
                         </p>
-                        <p className={cx('name')}>Long Phạm</p>
+                        <p className={cx('name')}>{user.full_name}</p>
                     </div>
                 </div>
             </HeadlessTippy>
-        </div>
+        </Link>
     );
 }
 

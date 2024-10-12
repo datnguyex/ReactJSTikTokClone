@@ -5,12 +5,14 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Image } from '~/component/Image/';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 const cx = classNames.bind(style);
 
 function AccountItem({ data }) {
     // console.log('searchResult', data);
+    // const [urlAccount, setUrlAccount] = useState(data.nickname);
     return (
-        <Link to={`@${data.nickname}`} className={cx('wrapper')}>
+        <Link className={cx('wrapper')}>
             <Image
                 className={cx('avatar')}
                 src={data.avatar}

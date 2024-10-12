@@ -119,4 +119,12 @@ class UserController extends Controller
             'videos' => $videos,
         ]);
     }
+    public function getAllUser(Request $request) {
+        $users = User::all();
+        return response()->json([
+            'message' => 'get all user sussesfully',
+            'data' => $users
+        ]);
+    }
+
 }

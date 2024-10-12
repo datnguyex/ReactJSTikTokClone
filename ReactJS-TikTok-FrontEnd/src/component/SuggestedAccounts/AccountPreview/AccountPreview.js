@@ -7,15 +7,16 @@ import styles from './AccountPreview.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AccountPreview() {
+function AccountPreview({ user }) {
+    // console.log('user', user);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header')}>
-                <Image
+                <img
                     className={cx('avatar')}
                     loading="lazy"
                     alt=""
-                    src="https://th.bing.com/th/id/OIP.aQ2-HK9gCw256kym3o0qRgHaHF?rs=1&pid=ImgDetMain"
+                    src={`http://127.0.0.1:8000/storage/${user.image}`}
                 />
                 <Button primary className={cx('follow-btn')}>
                     Following
@@ -23,15 +24,15 @@ function AccountPreview() {
             </div>
             <div className="body">
                 <p className={cx('nickName')}>
-                    <span>LongPhh</span>
+                    <span> {user.nickname}</span>
                     <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
                 </p>
-                <p className={cx('name')}>Long Phạm</p>
+                <p className={cx('name')}>{user.full_name}</p>
                 <p className={cx('analytics')}>
-                    <strong className={cx('value')}>8.2M </strong>
+                    <strong className={cx('value')}> {user.followings_count} </strong>
                     <span className={cx('space')}>.</span>
                     <span className={cx('label')}>Followers</span>
-                    <strong className={cx('value')}>8.2M </strong>
+                    <strong className={cx('value')}> {user.likes_count} </strong>
                     <span className={cx('space')}>.</span>
                     <span className={cx('label')}>Likes</span>
                 </p>

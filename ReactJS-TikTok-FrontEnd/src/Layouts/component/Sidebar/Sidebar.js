@@ -38,8 +38,8 @@ function Sidebar({ userValue }) {
             </Menu>
             {currentUser ? (
                 <>
-                    <SuggestedAccounts label="Suggested Accounts"></SuggestedAccounts>
-                    <SuggestedAccounts label="Follow Accounts"></SuggestedAccounts>
+                    <SuggestedAccounts userValue={userValue} label="Suggested Accounts"></SuggestedAccounts>
+                    <SuggestedAccounts userValue={userValue} label="Follow Accounts"></SuggestedAccounts>
                 </>
             ) : (
                 <div>

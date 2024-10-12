@@ -22,7 +22,7 @@ class User extends Authenticatable
         'avatar',
         'bio',
         'DOB',
-         'image',   
+        'image',   
         'tick',
         'followings_count',
         'likes_count',

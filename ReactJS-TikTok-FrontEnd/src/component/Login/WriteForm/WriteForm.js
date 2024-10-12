@@ -94,9 +94,6 @@ const WriteForm = ({ type, handleSetITEMS, handleTimeout, handleForm, handleUser
     const handleDisplayReset = () => {
         setDisplayReset(!displayReset);
     };
-    console.log('valueEmail', valueEmail);
-    console.log('valueCode', valueCode);
-    console.log('password', password);
 
     const handleSendCode = () => {
         axios
@@ -292,7 +289,7 @@ const WriteForm = ({ type, handleSetITEMS, handleTimeout, handleForm, handleUser
                             handleSetHidePass={handleSetHidePass}
                             handleSubmitResetPassword={handleSubmitResetPassword}
                         ></ResetPassword>
-                        {/* {checkPassHave == true ? (
+                        {checkPassHave == true ? (
                             <>
                                 <p classNames={cx('title-passHave')}>Your password must have </p>
                                 <div
@@ -318,7 +315,7 @@ const WriteForm = ({ type, handleSetITEMS, handleTimeout, handleForm, handleUser
                             </>
                         ) : (
                             <></>
-                        )} */}
+                        )}
                     </>
                 ) : (
                     <></>
