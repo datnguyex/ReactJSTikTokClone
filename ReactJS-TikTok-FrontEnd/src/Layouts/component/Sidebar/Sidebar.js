@@ -16,7 +16,7 @@ import {
 import { memo, useEffect, useState } from 'react';
 const cx = classNames.bind(style);
 
-function Sidebar({ userValue }) {
+function Sidebar({ userValue, handleReloadSidebar, reaload }) {
     const currentUser = userValue != null ? true : false;
     const [mouseEnter, setmouseEnter] = useState(false);
 
@@ -38,8 +38,23 @@ function Sidebar({ userValue }) {
             </Menu>
             {currentUser ? (
                 <>
-                    <SuggestedAccounts userValue={userValue} label="Suggested Accounts"></SuggestedAccounts>
-                    <SuggestedAccounts userValue={userValue} label="Follow Accounts"></SuggestedAccounts>
+                    {/* Suggested Acount */}
+                    <SuggestedAccounts
+                        handleReloadSidebar={handleReloadSidebar}
+                        typeSidebar={'suggest'}
+                        userValue={userValue}
+                        label="Suggested Accounts"
+                        reaload={reaload}
+                    ></SuggestedAccounts>
+
+                    {/* following acount */}
+                    <SuggestedAccounts
+                        handleReloadSidebar={handleReloadSidebar}
+                        typeSidebar={'follow'}
+                        userValue={userValue}
+                        label="Follow Accounts"
+                        reaload={reaload}
+                    ></SuggestedAccounts>
                 </>
             ) : (
                 <div>

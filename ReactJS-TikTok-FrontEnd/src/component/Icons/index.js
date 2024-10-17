@@ -72,4 +72,5 @@ export {
     SongIcon,
     ReportCircleIcon,
     SmileFaceIcon,
+    UserCheckIcon,
 } from './Icons';

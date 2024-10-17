@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 const cx = classNames.bind(style);
 
-function AccountItem({ data }) {
+function AccountItem({ data, handleReloadSidebar }) {
     // console.log('searchResult', data);
     // const [urlAccount, setUrlAccount] = useState(data.nickname);
     return (

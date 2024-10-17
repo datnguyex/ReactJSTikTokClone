@@ -25,6 +25,7 @@ class User extends Authenticatable
         'image',   
         'tick',
         'followings_count',
+        'follwers_count',
         'likes_count',
         'website_url',
         'facebook_url',

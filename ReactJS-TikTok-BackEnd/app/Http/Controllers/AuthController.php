@@ -108,6 +108,7 @@ class AuthController extends Controller
                 'email' => $request->input('email'),
                 'nickname' => $request->input('nickNameOption1'),
                 'followings_count'=> 0,
+                'follwers_count'=> 0,
                 'likes_count' => 0,
                 'full_name'=> $request->input('nickNameOption1'),
                 'DOB' => $dob,

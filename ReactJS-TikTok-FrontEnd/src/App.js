@@ -16,7 +16,10 @@ function App() {
     const [showUpdate, setShowUpdate] = useState(false);
     const [commentVideo, setCommentVideo] = useState(null);
     const [displayLogOut, setDisPlayLogOut] = useState(false);
-
+    const [reaload, setReload] = useState(false);
+    const handleReloadSidebar = () => {
+        setReload(!reaload);
+    };
     const handleSetUpdate = () => {
         setShowUpdate(!showUpdate);
     };
@@ -76,6 +79,8 @@ function App() {
                             element={
                                 <div className="app-wrap">
                                     <Layout
+                                        reaload={reaload}
+                                        handleReloadSidebar={handleReloadSidebar}
                                         handleDisPlayLogOut={handleDisPlayLogOut}
                                         userValue={userValue}
                                         displayLogin={handleDisplayLogin}
@@ -117,12 +122,18 @@ function App() {
                                             )}
                                             {route.path == '/:nickname' ? (
                                                 <Page
+                                                    reaload={reaload}
+                                                    handleReloadSidebar={handleReloadSidebar}
                                                     userValue={userValue}
                                                     handleSetUpdate={handleSetUpdate}
                                                     showUpdate={showUpdate}
                                                 />
                                             ) : (
-                                                <Page userValue={userValue} handleCommentVideo={handleCommentVideo} />
+                                                <Page
+                                                    reaload={reaload}
+                                                    userValue={userValue}
+                                                    handleCommentVideo={handleCommentVideo}
+                                                />
                                             )}
                                         </>
                                     </Layout>

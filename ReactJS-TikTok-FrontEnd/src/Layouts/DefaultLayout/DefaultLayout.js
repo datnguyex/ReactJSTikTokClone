@@ -5,10 +5,10 @@ import Header from '../component/Header';
 import Sidebar from '../component/Sidebar/index';
 import style from './DefaultLayout.module.scss';
 import Button from '~/component/Button';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 const cx = classNames.bind(style);
 
-function DefaultLayout({ children, displayLogin, userValue, handleDisPlayLogOut }) {
+function DefaultLayout({ children, displayLogin, userValue, handleDisPlayLogOut, reaload, handleReloadSidebar }) {
     const scrollAmount = 900;
 
     return (
@@ -18,7 +18,7 @@ function DefaultLayout({ children, displayLogin, userValue, handleDisPlayLogOut 
             </Button>
             <Header handleDisPlayLogOut={handleDisPlayLogOut} userValue={userValue} displayLogin={displayLogin} />
             <div className={cx('container')}>
-                <Sidebar userValue={userValue} />
+                <Sidebar handleReloadSidebar={handleReloadSidebar} reaload={reaload} userValue={userValue} />
                 <div className={cx('content')}>{children}</div>
             </div>
         </div>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('bio')->nullable();
             $table->Boolean('tick')->nullable();
             $table->Integer('followings_count')->nullable();
+            $table->Integer('follwers_count')->nullable();
             $table->Integer('likes_count')->nullable();
             $table->string('website_url')->nullable(); 
             $table->string('facebook_url')->nullable(); 

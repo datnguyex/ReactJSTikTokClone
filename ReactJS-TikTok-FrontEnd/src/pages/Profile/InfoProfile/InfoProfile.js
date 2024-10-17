@@ -8,38 +8,19 @@ import { memo, useEffect, useState } from 'react';
 import { Image } from '~/component/Image';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
-import {
-    ShareSolidIcon,
-    WriteIcon,
-    PostIcon,
-    EmbedIcon,
-    SendIcon,
-    FacebookIcon,
-    LinkIcon,
-    WhatsAppIcon,
-    TwitterIcon,
-    LinkedlnIcon,
-    TelegramIcon,
-    EmailIcon,
-    RedditIcon,
-    LineIcon,
-    PinteresIcon,
-} from '~/component/Icons';
+import { ShareSolidIcon, WriteIcon, UserCheckIcon } from '~/component/Icons';
 import UserInfo from '~';
 const cx = classNames.bind(style);
 
-function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic }) {
+function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic, handleReloadSidebar, reaload }) {
+    const [checkReload, setCheckReload] = useState();
     const { nickname } = useParams();
-
     const [nicknameParam, setNicknammeParam] = useState(nickname);
     const [profileOf, setProfileOf] = useState('');
     const [infoUser, setInfoUser] = useState('');
+    const [checkFollowing, setCheckFollowing] = useState('');
 
     const checkProfile = () => {
-        if (userValue == null) {
-            return;
-        }
         const nicknameToFetch = nicknameParam === userValue.nickname ? userValue.nickname : nicknameParam;
         nicknameParam === userValue.nickname ? setProfileOf('user') : setProfileOf('other');
         axios
@@ -53,13 +34,72 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic 
             });
     };
 
-    console.log('nicknameParam', nicknameParam);
+    const handleFollowing = () => {
+        axios
+            .post('http://127.0.0.1:8000/api/FollowUSer', {
+                nicknameFollower: userValue.nickname,
+                nicknameFollowed: nicknameParam,
+            })
+            .then((response) => {
+                console.log('response', response);
+                if (response.data.message === 'follow success') {
+                    setCheckFollowing('Followed');
+                    handleReloadSidebar();
+                } else {
+                    setCheckFollowing('Not Followed');
+                    handleReloadSidebar();
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching user data:', error.response ? error.response.data : error.message);
+            });
+    };
+
+    const handleCheckFollowing = () => {
+        axios
+            .get('http://127.0.0.1:8000/api/checkFollowing', {
+                params: {
+                    nicknameFollower: userValue.nickname,
+                    nicknameFollowed: nicknameParam,
+                },
+            })
+            .then((response) => {
+                // console.log('response', response);
+                if (response.data.message === 'You have not followed this person') {
+                    setCheckFollowing('Not Followed');
+                } else {
+                    setCheckFollowing('Followed');
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching user data:', error.response ? error.response.data : error.message);
+            });
+    };
+    console.log('reaload', reaload);
+    console.log('checkReload', checkReload);
+
     useEffect(() => {
+        if (userValue == null) {
+            return;
+        }
         setNicknammeParam(nickname);
     }, [nickname]);
     useEffect(() => {
+        if (userValue == null) {
+            return;
+        }
         checkProfile();
-    }, [userValue, nicknameParam]);
+        handleCheckFollowing();
+    }, [userValue, nicknameParam, checkFollowing]);
+    useEffect(() => {
+        handleCheckFollowing();
+    }, [checkReload]);
+    useEffect(() => {
+        if (reaload != checkReload) {
+            setCheckReload(reaload);
+        } else {
+        }
+    }, [reaload]);
     return (
         <>
             <div className={cx('info')}>
@@ -102,16 +142,25 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic 
                         </>
                     ) : (
                         <>
-                            <div className={cx('wrap-btnInfo')}>
-                                <Button
-                                    primary
-                                    className={cx('btn-follow')}
-                                    // leftIcon={<WriteIcon />}
-                                >
-                                    Follow
-                                </Button>
-                                <Button className={cx('btn-info')}>Message</Button>
-                            </div>
+                            {checkFollowing === 'Not Followed' ? (
+                                <div className={cx('wrap-btnInfo')}>
+                                    <Button onClick={handleFollowing} primary className={cx('btn-follow')}>
+                                        Follow
+                                    </Button>
+                                    <Button className={cx('btn-info')}>Message</Button>
+                                </div>
+                            ) : checkFollowing === 'Followed' ? (
+                                <div className={cx('wrap-btnInfo')}>
+                                    <Button
+                                        onClick={handleFollowing}
+                                        leftIcon={<UserCheckIcon />}
+                                        className={cx('btn-info')}
+                                    >
+                                        Following
+                                    </Button>
+                                    <Button className={cx('btn-info')}>Message</Button>
+                                </div>
+                            ) : null}
                         </>
                     )}
                 </div>
@@ -125,13 +174,13 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic 
                 </div>
                 <div className={cx('stats')}>
                     <strong className={cx('title-numb')}>
-                        {infoUser == null ? userValue.followings_count : infoUser.followings_count}
+                        {infoUser == null ? userValue.follwers_count : infoUser.follwers_count}
                     </strong>
                     <span className={cx('title-stats')}>Follower</span>
                 </div>
                 <h3 className={cx('stats')}>
                     <strong className={cx('title-numb')}>
-                        {infoUser == null ? userValue.followings_count : infoUser.likes_count}
+                        {infoUser == null ? userValue.likes_count : infoUser.likes_count}
                     </strong>
                     <span className={cx('title-stats')}>Liked</span>
                 </h3>
@@ -142,4 +191,4 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic 
     );
 }
 
-export default memo(InfoProfile);
+export default InfoProfile;

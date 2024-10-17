@@ -33,3 +33,8 @@ Route::post('sendCodeResetPassword', [UserController::class, 'sendCodeResetPassw
 Route::post('uploadVideo', [UserController::class, 'uploadVideo']);
 Route::post('getUserInfo', [UserController::class, 'getUserInfo']);
 Route::get('getAllUser', [UserController::class, 'getAllUser']);
+Route::post('FollowUSer', [UserController::class, 'FollowUSer']);
+Route::get('checkFollowing', [UserController::class, 'checkFollowing']);
+Route::get('getFollowingUsers', [UserController::class, 'getFollowingUsers']);
+Route::get('getSuggestedUsers', [UserController::class, 'getSuggestedUsers']);
+Route::get('getVideoFollowingUsers', [UserController::class, 'getVideoFollowingUsers']);

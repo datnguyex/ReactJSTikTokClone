@@ -12,22 +12,22 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
-function AccountItem({ user }) {
+function AccountItem({ user, userValue, handleReloadSidebar }) {
     const rederReview = (props) => (
         <div>
             <div tabIndex="-1" {...props}>
                 <PopperWrapper>
-                    <AccountPreview user={user} />
+                    <AccountPreview handleReloadSidebar={handleReloadSidebar} userValue={userValue} user={user} />
                 </PopperWrapper>
             </div>
         </div>
     );
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     return (
-        <Link to={`/${user.nickname}`}>
+        <Link>
             <HeadlessTippy placement="bottom" delay={[0, 80]} offset={[0, 0]} interactive render={rederReview}>
-                <div className={cx('account-item')}>
+                <Link to={`/${user.nickname}`} className={cx('account-item')}>
                     <img
                         className={cx('avatar')}
                         loading="lazy"
@@ -41,7 +41,7 @@ function AccountItem({ user }) {
                         </p>
                         <p className={cx('name')}>{user.full_name}</p>
                     </div>
-                </div>
+                </Link>
             </HeadlessTippy>
         </Link>
     );

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const cx = classNames.bind(style);
 
-const FollowingTool = forwardRef(({ className, onClick, icon, text, avatar = false }, ref) => {
+const FollowingTool = forwardRef(({ className, onClick, icon, text, avatar = false, usersFollowing }, ref) => {
     return (
         <>
             {avatar === false ? (
@@ -14,15 +14,19 @@ const FollowingTool = forwardRef(({ className, onClick, icon, text, avatar = fal
                     <strong className={cx('text')}>{text}</strong>
                 </div>
             ) : (
-                <div className={cx('avatar')} ref={ref}>
-                    <span className={cx('check-icon')}>{icon}</span>
-                </div>
+                <img
+                    src={`http://127.0.0.1:8000/storage/${usersFollowing.user.image}`}
+                    alt=""
+                    className={cx('avatar')}
+                    ref={ref}
+                >
+                    {/* <span className={cx('check-icon')}>{icon}</span> */}
+                </img>
             )}
         </>
     );
 });
 
-// Optional: define prop types if needed
 FollowingTool.propTypes = {
     icon: PropTypes.node.isRequired,
     text: PropTypes.string,

@@ -123,7 +123,12 @@ function UpdateProfile({ onClick, showUpdate, userValue, handleUserValue }) {
                             <Button onClick={handleTimeout} className={cx('btn-cancle')}>
                                 Cancel
                             </Button>
-                            <Link onClick={handleUpdateProfile} className={cx('btn-save')}>
+                            <Link
+                                onClick={handleUpdateProfile}
+                                className={cx('btn-save', {
+                                    'btn-save__text': username !== '' && nickname !== '' && bio !== '' && img !== '',
+                                })}
+                            >
                                 Save
                             </Link>
                         </div>

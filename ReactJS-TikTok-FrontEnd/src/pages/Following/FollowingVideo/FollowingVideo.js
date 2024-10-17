@@ -20,9 +20,10 @@ import { memo, useEffect, useState } from 'react';
 import { ListControlVideo } from '~/component/Array';
 const cx = classNames.bind(style);
 
-function FollowingVideo() {
+function FollowingVideo({ usersFollowing }) {
     const [show, setShow] = useState(false);
     const [mute, setMute] = useState(false);
+    console.log('usersFollowing.user.video', usersFollowing);
 
     const handleSetShow = () => {
         setShow(true);
@@ -43,20 +44,20 @@ function FollowingVideo() {
                 // autoPlay
                 controls
                 className={cx('home-video')}
-                src={video.video3}
+                src={`http://127.0.0.1:8000/storage/${usersFollowing.path}`}
                 width="258"
                 muted={mute}
                 height="459px"
             ></video>
             <div className={cx('infor-video')}>
-                <h3 className={cx('nickname')}>thaybetone</h3>
+                <h3 className={cx('nickname')}>{usersFollowing.user.nickname}</h3>
                 <div className={cx('des')}>
-                    <p className={cx('name')}>Vẫn là quả beat thế giới của SlimV #tiktokfconline #fconline #ATSH</p>
+                    <p className={cx('name')}>{usersFollowing.description}</p>
                 </div>
                 <div className={cx('sound')}>
                     <span className={cx('sound-icon')}>{<SoundIcon />}</span>
                     <span className={cx('space')}>.</span>
-                    <span className={cx('sound-info')}>Nhạc nền - No Music No Life</span>
+                    <span className={cx('sound-info')}>Nhạc nền - {usersFollowing.user.nickname}</span>
                 </div>
             </div>
             {/* control */}

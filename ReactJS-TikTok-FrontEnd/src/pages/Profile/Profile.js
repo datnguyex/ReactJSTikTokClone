@@ -11,7 +11,7 @@ import video from '~/assets/video';
 import { useCallback } from 'react';
 const cx = classNames.bind(style);
 
-function Profile({ userValue, handleSetUpdate, showUpdate }) {
+function Profile({ userValue, handleSetUpdate, showUpdate, handleReloadSidebar, reaload }) {
     const [selected, setSelected] = useState('Videos');
     const [type, setType] = useState('Lates');
     const [videosPublic, setVideoPublic] = useState([]);
@@ -24,11 +24,13 @@ function Profile({ userValue, handleSetUpdate, showUpdate }) {
     const handVideosPublic = (item) => {
         setVideoPublic(item);
     };
-    console.log('videosPublic', videosPublic);
+    // console.log('handleReloadSidebar', handleReloadSidebar, reaload);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
                 <InfoProfile
+                    reaload={reaload}
+                    handleReloadSidebar={handleReloadSidebar}
                     handVideosPublic={handVideosPublic}
                     userValue={userValue}
                     handleSetUpdate={handleSetUpdate}
