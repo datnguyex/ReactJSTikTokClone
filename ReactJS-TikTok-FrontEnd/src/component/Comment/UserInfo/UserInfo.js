@@ -25,6 +25,7 @@ function UserInfo({
     handleHeartComment,
     heartComment,
     commentVideo,
+    userValue,
 }) {
     return (
         <>
@@ -39,13 +40,19 @@ function UserInfo({
                         handleHeart={handleHeart}
                         line={line}
                         handleLine={handleLine}
+                        commentVideo={commentVideo}
                     />
                 }
                 <div className={cx('line-top')}></div>
                 {/* /// */}
                 {changeType == 'Comments' ? (
                     <>
-                        <TypeComment handleHeartComment={handleHeartComment} heartComment={heartComment} />
+                        <TypeComment
+                            userValue={userValue}
+                            commentVideo={commentVideo}
+                            handleHeartComment={handleHeartComment}
+                            heartComment={heartComment}
+                        />
                     </>
                 ) : (
                     <>

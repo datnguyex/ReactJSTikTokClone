@@ -35,6 +35,7 @@ function App() {
     const handleDisPlayLogOut = () => {
         setDisPlayLogOut(!displayLogOut);
     };
+    // console.log('commentVideo', commentVideo);
     const fetchUserValue = () => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -98,6 +99,7 @@ function App() {
                                         )}
                                         {commentVideo && (
                                             <Comment
+                                                userValue={userValue}
                                                 handleCommentVideo={handleCommentVideo}
                                                 commentVideo={commentVideo}
                                             />

@@ -220,6 +220,17 @@ class UserController extends Controller
             'data' => $videos
         ]);
     }
+    public function getVideoSuggested(Request $request) {
+        $users = Follow::where('follower_id', $request->user_id)->get();
+        $followedIds = $users->pluck('followed_id');
+    
+        $videos = Video::with('user')->whereNotIn('user_id', $followedIds)->get();
+    
+        return response()->json([
+            'message' => 'get suggested videos successfully',
+            'data' => $videos
+        ]);
+    }
     
 
 }

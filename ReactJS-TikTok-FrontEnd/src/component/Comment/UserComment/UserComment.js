@@ -6,7 +6,7 @@ import Tippy from '@tippyjs/react/';
 import 'tippy.js/dist/tippy.css';
 import { Image } from '~/component/Image';
 import { CommentShare } from '~/component/Array';
-
+import { format } from 'date-fns';
 import {
     HeartIcon,
     HeartSolidIcon,
@@ -22,7 +22,20 @@ import {
 } from '~/component/Icons';
 const cx = classNames.bind(style);
 
-function UserComment({ handleLine, line, handleHeart, heart, handleSave, save, handleChangeType, changeType }) {
+function UserComment({
+    commentVideo,
+    handleLine,
+    line,
+    handleHeart,
+    heart,
+    handleSave,
+    save,
+    handleChangeType,
+    changeType,
+}) {
+    console.log('commentVideo', commentVideo);
+    const created_at = new Date(commentVideo.user.created_at);
+    const formattedDate = `${created_at.getDate()}/${created_at.getMonth() + 1}/${created_at.getFullYear()}`;
     return (
         <>
             <div className={cx('content-right')}>
@@ -35,11 +48,11 @@ function UserComment({ handleLine, line, handleHeart, heart, handleSave, save, h
                                 src="https://th.bing.com/th/id/OIP.pegfGc8sWHh2_RuwiuAknwHaHZ?rs=1&pid=ImgDetMain"
                             />
                             <div className={cx('wrap-text__user')}>
-                                <p className={cx('nicknname_user')}>Legiabao0501</p>
+                                <p className={cx('nicknname_user')}>{commentVideo.user.nickname}</p>
                                 <div className={cx('name-timePost__user')}>
-                                    <p className={cx('name_user')}>Lê Gia Bảo</p>
+                                    <p className={cx('name_user')}>{commentVideo.user.full_name}</p>
                                     <p className={cx('timePost_space')}>.</p>
-                                    <p className={cx('timePost_user')}>1-20</p>
+                                    <p className={cx('timePost_user')}>{formattedDate}</p>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +60,7 @@ function UserComment({ handleLine, line, handleHeart, heart, handleSave, save, h
                     </div>
                     <div onMouseLeave={() => handleLine(null)} className={cx('wrap-des__hashtag')}>
                         <p className={cx('text-des__hashtag')}>
-                            Bao nhiêu thương nhớ gom nhặc đầy{' '}
+                            {commentVideo.description}{' '}
                             <span
                                 onMouseEnter={() => handleLine('hashtag4')}
                                 className={cx('tex-hashtag', line === 'hashtag4' ? 'line_bottom' : '')}
@@ -82,7 +95,7 @@ function UserComment({ handleLine, line, handleHeart, heart, handleSave, save, h
                     >
                         <div className={cx('text-song', line === 'song' ? 'line_bottom' : '')}>
                             <p className={cx('icon__text-song')}>$</p>
-                            <p>nhạc nền</p> <p className={cx('line__spread')}>-</p> <p>Lê Gia Bảo</p>
+                            <p>nhạc nền</p> <p className={cx('line__spread')}>-</p> <p>{commentVideo.user.nickname}</p>
                         </div>
                     </div>
                 </div>

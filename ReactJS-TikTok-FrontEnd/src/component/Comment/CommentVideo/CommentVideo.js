@@ -14,7 +14,7 @@ function CommentVideo({ MENU_ITEMS, handleCommentVideo, handleMute, mute, commen
     return (
         <>
             <div className={cx('wrap-content__left')}>
-                <video className={cx('video-background')} src={commentVideo} />
+                <video className={cx('video-background')} src={`http://127.0.0.1:8000/storage/${commentVideo.path}`} />
                 <span onClick={() => handleCommentVideo(null)} className={cx('wrap-icon__close')}>
                     <XWordIcon fill={'#fff'} width={'2.5rem'} height={'2.5rem'} />
                 </span>
@@ -35,7 +35,7 @@ function CommentVideo({ MENU_ITEMS, handleCommentVideo, handleMute, mute, commen
                 </Menu>
             </div>
             <div controls className={cx('wrap__left-video')}>
-                <video muted={mute} controls src={commentVideo} />
+                <video muted={mute} controls src={`http://127.0.0.1:8000/storage/${commentVideo.path}`} />
             </div>
         </>
     );

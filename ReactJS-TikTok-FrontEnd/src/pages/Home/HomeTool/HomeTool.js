@@ -6,30 +6,39 @@ import PropTypes from 'prop-types';
 
 const cx = classNames.bind(style);
 
-const HomeTool = forwardRef(({ handleCommentVideo, className, onClick, icon, text, avatar = false }, ref) => {
-    const handleClick = (event) => {
-        if (typeof handleCommentVideo === 'function') {
-            handleCommentVideo(video.video2);
-        } else if (typeof onClick === 'function') {
-            onClick(event);
-        }
-    };
+const HomeTool = forwardRef(
+    ({ usersSuggested, handleCommentVideo, className, onClick, icon, text, avatar = false }, ref) => {
+        const handleClick = (event) => {
+            if (typeof handleCommentVideo === 'function') {
+                // handleCommentVideo(`http://127.0.0.1:8000/storage/${usersSuggested.path}`);
+                handleCommentVideo(usersSuggested);
+            } else if (typeof onClick === 'function') {
+                onClick(event);
+            }
+        };
 
-    return (
-        <>
-            {avatar === false ? (
-                <div onClick={handleClick} className={cx('wrap-icon')} ref={ref}>
-                    <span className={cx('icon', className)}>{icon}</span>
-                    <strong className={cx('text')}>{text}</strong>
-                </div>
-            ) : (
-                <div className={cx('avatar')} ref={ref}>
-                    <span className={cx('check-icon')}>{icon}</span>
-                </div>
-            )}
-        </>
-    );
-});
+        return (
+            <>
+                {avatar === false ? (
+                    <div onClick={handleClick} className={cx('wrap-icon')} ref={ref}>
+                        <span className={cx('icon', className)}>{icon}</span>
+                        <strong className={cx('text')}>{text}</strong>
+                    </div>
+                ) : (
+                    // <div className={cx('avatar')} ref={ref}>
+                    //     <span className={cx('check-icon')}>{icon}</span>
+                    // </div>
+                    <img
+                        src={`http://127.0.0.1:8000/storage/${usersSuggested.user.image}`}
+                        alt=""
+                        className={cx('avatar')}
+                        ref={ref}
+                    ></img>
+                )}
+            </>
+        );
+    },
+);
 
 // Optional: define prop types if needed
 HomeTool.propTypes = {

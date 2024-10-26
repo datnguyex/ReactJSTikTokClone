@@ -10,7 +10,7 @@ import { useEffect, useState, memo } from 'react';
 
 const cx = classNames.bind(style);
 
-function HomeVideo() {
+function HomeVideo({ usersSuggested }) {
     const [show, setShow] = useState(false);
     const [mute, setMute] = useState(false);
 
@@ -33,20 +33,20 @@ function HomeVideo() {
                 // autoPlay
                 controls
                 className={cx('home-video')}
-                src={video.video1}
+                src={`http://127.0.0.1:8000/storage/${usersSuggested.path}`}
                 width="258"
                 muted={mute}
                 height="459px"
             ></video>
             <div className={cx('infor-video')}>
-                <h3 className={cx('nickname')}>thaybetone</h3>
+                <h3 className={cx('nickname')}>{usersSuggested.user.nickname}</h3>
                 <div className={cx('des')}>
-                    <p className={cx('name')}>Vẫn là quả beat thế giới của SlimV #tiktokfconline #fconline #ATSH</p>
+                    <p className={cx('name')}>{usersSuggested.description}</p>
                 </div>
                 <div className={cx('sound')}>
                     <span className={cx('sound-icon')}>{<SoundIcon />}</span>
                     <span className={cx('space')}>.</span>
-                    <span className={cx('sound-info')}>Nhạc nền - No Music No Life</span>
+                    <span className={cx('sound-info')}>Nhạc nền - {usersSuggested.user.nickname}</span>
                 </div>
             </div>
             {/* control */}

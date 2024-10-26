@@ -6,10 +6,13 @@ import axios from 'axios';
 
 const cx = classNames.bind(style);
 
-function Following({ userValue, reaload }) {
+function Following({ userValue, reaload, handleCommentVideo }) {
     const [usersFollowing, SetUsersFollowing] = useState([]);
     const [checkReload, setChechReload] = useState();
     const fetchUsersFollowing = () => {
+        if (!userValue) {
+            return;
+        }
         axios
             .get('http://127.0.0.1:8000/api/getVideoFollowingUsers', {
                 params: {
@@ -23,7 +26,6 @@ function Following({ userValue, reaload }) {
                 console.error('Error fetching user data:', error.response ? error.response.data : error.message);
             });
     };
-    // console.log('usersFollowing', usersFollowing);
 
     useEffect(() => {
         if (!userValue) {
@@ -42,7 +44,7 @@ function Following({ userValue, reaload }) {
     return (
         <div id="wrapz" className={cx('wrapper')}>
             {usersFollowing.map((index) => (
-                <FollowingItem usersFollowing={index} />
+                <FollowingItem handleCommentVideo={handleCommentVideo} usersFollowing={index} />
             ))}
         </div>
     );

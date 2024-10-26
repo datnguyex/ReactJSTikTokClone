@@ -19,7 +19,7 @@ import {
 import 'tippy.js/dist/tippy.css';
 import { useState, useCallback } from 'react';
 const cx = classNames.bind(style);
-function FollowingItem({ usersFollowing }) {
+function FollowingItem({ usersFollowing, handleCommentVideo }) {
     const [save, setSave] = useState(false);
     const [heart, setHeart] = useState(false);
 
@@ -44,7 +44,12 @@ function FollowingItem({ usersFollowing }) {
                         text={'24.2K'}
                         className={cx(save == true ? 'show' : 'hide')}
                     />
-                    <FollowingTool icon={<CommentIcon />} text={'390.8K'} />
+                    <FollowingTool
+                        usersFollowing={usersFollowing}
+                        handleCommentVideo={handleCommentVideo}
+                        icon={<CommentIcon />}
+                        text={'390.8K'}
+                    />
                     <FollowingTool
                         onClick={handleSetHeart}
                         icon={heart == true ? <HeartSolidIcon /> : <HeartIcon />}

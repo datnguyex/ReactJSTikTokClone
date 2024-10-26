@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::get('checkFollowing', [UserController::class, 'checkFollowing']);
 Route::get('getFollowingUsers', [UserController::class, 'getFollowingUsers']);
 Route::get('getSuggestedUsers', [UserController::class, 'getSuggestedUsers']);
 Route::get('getVideoFollowingUsers', [UserController::class, 'getVideoFollowingUsers']);
+Route::get('getVideoSuggested', [UserController::class, 'getVideoSuggested']);
+Route::post('commentVideo', [CommentController::class, 'commentVideo']);
+Route::get('getCommentVideo', [CommentController::class, 'getCommentVideo']);

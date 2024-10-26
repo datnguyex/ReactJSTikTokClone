@@ -12,6 +12,8 @@
     margin-right: 12px;
 }
 .wrap-comment__info {
+    width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,7 +30,6 @@
 }
 .comment__member-des {
     cursor: pointer;
-
     color: rgb(22, 24, 35);
     line-height: 2.1rem;
     font-size: 1.4rem;
@@ -37,6 +38,7 @@
 .wrap-reply__comment {
     display: flex;
     align-items: center;
+    // background-color: red;
 }
 .date-post__comemnt {
     color: rgba(22, 24, 35, 0.5);

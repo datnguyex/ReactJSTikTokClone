@@ -14,7 +14,7 @@ import { type } from '@testing-library/user-event/dist/type';
 import { CommentItem } from '~/component/Array';
 import { useCallback } from 'react';
 const cx = classNames.bind(style);
-function Comment({ commentVideo, handleCommentVideo }) {
+function Comment({ commentVideo, handleCommentVideo, userValue }) {
     const [changeType, setChangeType] = useState('Comments');
     const [heart, setHeart] = useState(false);
     const [heartComment, setHeartComment] = useState([]);
@@ -61,6 +61,7 @@ function Comment({ commentVideo, handleCommentVideo }) {
             />
             {/* // */}
             <UserInfo
+                userValue={userValue}
                 handleLine={handleLine}
                 line={line}
                 handleHeart={handleHeart}
