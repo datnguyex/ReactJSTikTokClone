@@ -21,6 +21,7 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic,
     const [checkFollowing, setCheckFollowing] = useState('');
 
     const checkProfile = () => {
+        if (!userValue) return;
         const nicknameToFetch = nicknameParam === userValue.nickname ? userValue.nickname : nicknameParam;
         nicknameParam === userValue.nickname ? setProfileOf('user') : setProfileOf('other');
         axios
@@ -35,6 +36,7 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic,
     };
 
     const handleFollowing = () => {
+        if (!userValue) return;
         axios
             .post('http://127.0.0.1:8000/api/FollowUSer', {
                 nicknameFollower: userValue.nickname,
@@ -56,6 +58,7 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic,
     };
 
     const handleCheckFollowing = () => {
+        if (!userValue) return;
         axios
             .get('http://127.0.0.1:8000/api/checkFollowing', {
                 params: {
@@ -79,20 +82,15 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic,
     console.log('checkReload', checkReload);
 
     useEffect(() => {
-        if (userValue == null) {
-            return;
-        }
         setNicknammeParam(nickname);
     }, [nickname]);
     useEffect(() => {
-        if (userValue == null) {
-            return;
-        }
         checkProfile();
         handleCheckFollowing();
     }, [userValue, nicknameParam, checkFollowing]);
     useEffect(() => {
         handleCheckFollowing();
+        checkProfile();
     }, [checkReload]);
     useEffect(() => {
         if (reaload != checkReload) {

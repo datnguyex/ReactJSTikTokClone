@@ -182,17 +182,17 @@ function RegisterForm({
                 </label>
             </div>
             <button
-                // onClick={
-                //     valueDay != '' &&
-                //     valueMonth !== '' &&
-                //     valueYear != '' &&
-                //     valueEmail != '' &&
-                //     valuePassWord != '' &&
-                //     valueCode != '' &&
-                //     checkClause != false
-                //         ? handleSendCode
-                //         : null
-                // }
+                onClick={
+                    valueDay != '' &&
+                    valueMonth !== '' &&
+                    valueYear != '' &&
+                    valueEmail != '' &&
+                    valuePassWord != '' &&
+                    valueCode != '' &&
+                    checkClause != false
+                        ? handleSendCode
+                        : null
+                }
                 className={cx('btn-log', {
                     'textchange-btnDigit':
                         valueDay !== '' &&
