@@ -12,7 +12,15 @@ import { ShareSolidIcon, WriteIcon, UserCheckIcon } from '~/component/Icons';
 import UserInfo from '~';
 const cx = classNames.bind(style);
 
-function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic, handleReloadSidebar, reaload }) {
+function InfoProfile({
+    handleVideosLike,
+    userValue,
+    handleSetUpdate,
+    showUpdate,
+    handVideosPublic,
+    handleReloadSidebar,
+    reaload,
+}) {
     const [checkReload, setCheckReload] = useState();
     const { nickname } = useParams();
     const [nicknameParam, setNicknammeParam] = useState(nickname);
@@ -25,10 +33,12 @@ function InfoProfile({ userValue, handleSetUpdate, showUpdate, handVideosPublic,
         const nicknameToFetch = nicknameParam === userValue.nickname ? userValue.nickname : nicknameParam;
         nicknameParam === userValue.nickname ? setProfileOf('user') : setProfileOf('other');
         axios
-            .post('http://127.0.0.1:8000/api/getUserInfo', { nickname: nicknameToFetch }) // Wrap in an object
+            .post('http://127.0.0.1:8000/api/getUserInfo', { nickname: nicknameToFetch })
             .then((response) => {
                 setInfoUser(response.data.data);
                 handVideosPublic(response.data.videos);
+                handleVideosLike(response.data.videosLike);
+                console.log('responseUserVideo', response.data);
             })
             .catch((error) => {
                 console.error('Error fetching user data:', error.response ? error.response.data : error.message); // More detailed error

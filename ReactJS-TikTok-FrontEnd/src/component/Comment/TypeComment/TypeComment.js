@@ -13,7 +13,14 @@ import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import { set } from 'date-fns';
 const cx = classNames.bind(style);
-function TypeComment({ userValue, commentVideo, handleHeartComment, heartComment }) {
+function TypeComment({
+    handleSetReload,
+    userValue,
+    commentVideo,
+    handleHeartComment,
+    heartComment,
+    handleReloadComment,
+}) {
     const [commentsUser, setCommentsUSer] = useState([]);
     const [describeComment, setDescribeComments] = useState('');
     // console.log('commentVideo', commentVideo);
@@ -22,7 +29,7 @@ function TypeComment({ userValue, commentVideo, handleHeartComment, heartComment
     const handleDescribeComment = (e) => {
         setDescribeComments(e.target.value);
     };
-    console.log('describeComment', describeComment);
+    // console.log('describeComment', describeComment);
     const handleGetComments = async (event) => {
         try {
             const response = await axios.get('http://127.0.0.1:8000/api/getCommentVideo', {
@@ -50,6 +57,8 @@ function TypeComment({ userValue, commentVideo, handleHeartComment, heartComment
             });
             console.log('Comment submitted successfully:', response.data);
             handleGetComments();
+            handleSetReload();
+            handleReloadComment();
         } catch (error) {
             console.error('Error adding comment:', error);
         }

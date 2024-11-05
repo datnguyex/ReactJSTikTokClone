@@ -6,7 +6,7 @@ import { useRef, memo } from 'react';
 
 const cx = classNames.bind(style);
 
-function PersonalVideos({ children, videosPublic }) {
+function PersonalVideos({ videosLike, children, videosPublic }) {
     const videoRef = useRef([]);
 
     const handleSetPlay = (index) => {
@@ -27,8 +27,9 @@ function PersonalVideos({ children, videosPublic }) {
         <>
             {children === 'Favorites' ? (
                 <div className={cx('personal-videos')}>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                        <div key={index} className={cx('video-container')}>
+                    {videosLike.map((videoItem, index) => (
+                        <div key={videoItem.id} className={cx('video-container')}>
+                            {console.log('videoItem', videoItem)}
                             <video
                                 muted
                                 ref={setRef(index)}
@@ -37,7 +38,8 @@ function PersonalVideos({ children, videosPublic }) {
                                 type="video/mp4"
                                 controls
                                 className={cx('Pervideo')}
-                                src={video.video2}
+                                src={`http://127.0.0.1:8000/storage/${videoItem.path}`}
+                                aria-label={`Video ${index + 1}`}
                             />
                             <div className={cx('wrap-view')}>
                                 <span className={cx('icon-video')}>

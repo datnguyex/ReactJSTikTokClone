@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const cx = classNames.bind(style);
 
-function Following({ userValue, reaload, handleCommentVideo }) {
+function Following({ userValue, reaload, handleCommentVideo, reLoadComment }) {
     const [usersFollowing, SetUsersFollowing] = useState([]);
     const [checkReload, setChechReload] = useState();
     const fetchUsersFollowing = () => {
@@ -44,7 +44,12 @@ function Following({ userValue, reaload, handleCommentVideo }) {
     return (
         <div id="wrapz" className={cx('wrapper')}>
             {usersFollowing.map((index) => (
-                <FollowingItem handleCommentVideo={handleCommentVideo} usersFollowing={index} />
+                <FollowingItem
+                    reLoadComment={reLoadComment}
+                    userValue={userValue}
+                    handleCommentVideo={handleCommentVideo}
+                    usersFollowing={index}
+                />
             ))}
         </div>
     );

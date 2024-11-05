@@ -15,6 +15,7 @@ function Profile({ userValue, handleSetUpdate, showUpdate, handleReloadSidebar, 
     const [selected, setSelected] = useState('Videos');
     const [type, setType] = useState('Lates');
     const [videosPublic, setVideoPublic] = useState([]);
+    const [videosLike, setVidesLike] = useState([]);
     const handleSelected = (value) => {
         setSelected(value);
     };
@@ -23,6 +24,9 @@ function Profile({ userValue, handleSetUpdate, showUpdate, handleReloadSidebar, 
     };
     const handVideosPublic = (item) => {
         setVideoPublic(item);
+    };
+    const handleVideosLike = (item) => {
+        setVidesLike(item);
     };
     // console.log('handleReloadSidebar', handleReloadSidebar, reaload);
     return (
@@ -35,6 +39,7 @@ function Profile({ userValue, handleSetUpdate, showUpdate, handleReloadSidebar, 
                     userValue={userValue}
                     handleSetUpdate={handleSetUpdate}
                     showUpdate={showUpdate}
+                    handleVideosLike={handleVideosLike}
                 />
                 <div className={cx('personal-content')}>
                     <div className={cx('control')}>
@@ -51,7 +56,7 @@ function Profile({ userValue, handleSetUpdate, showUpdate, handleReloadSidebar, 
                             <span className={cx('icon-control')}>
                                 <BlockIcon />
                             </span>
-                            <span className={cx('text-control')}>Favorites</span>
+                            <span className={cx('text-control')}>Liked</span>
                         </p>
                         <p
                             className={cx('item-control', { selected: selected == 'Liked' })}
@@ -60,7 +65,7 @@ function Profile({ userValue, handleSetUpdate, showUpdate, handleReloadSidebar, 
                             <span className={cx('icon-control')}>
                                 <BlockIcon />
                             </span>
-                            <span className={cx('text-control')}>Liked</span>
+                            <span className={cx('text-control')}>Favorites</span>
                         </p>
                     </div>
                     {selected == 'Videos' ? (
@@ -93,7 +98,9 @@ function Profile({ userValue, handleSetUpdate, showUpdate, handleReloadSidebar, 
                     component nay
                 */}
 
-                <PersonalVideos videosPublic={videosPublic}>{selected}</PersonalVideos>
+                <PersonalVideos videosLike={videosLike} videosPublic={videosPublic}>
+                    {selected}
+                </PersonalVideos>
             </div>
         </div>
     );

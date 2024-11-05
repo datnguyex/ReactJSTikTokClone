@@ -12,6 +12,7 @@ import 'tippy.js/dist/tippy.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import images from '~/assets/images';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 const cx = classNames.bind(style);
 function UploadItem({ userValue }) {
     const [video, setVideo] = useState(null);
@@ -62,12 +63,14 @@ function UploadItem({ userValue }) {
             alert('khong tim thay video');
         }
     };
+
     const handleUpLoadVideo = async (event) => {
         event.preventDefault();
         const formData = new FormData();
         formData.append('video', videoSubmit);
         formData.append('user_id', userValue.id);
         formData.append('description', description);
+
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/uploadVideo', formData, {
                 headers: {
@@ -75,10 +78,30 @@ function UploadItem({ userValue }) {
                 },
             });
             console.log('Video uploaded successfully:', response.data);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Video Upload Successful',
+                text: 'Your video has been uploaded successfully!',
+                showConfirmButton: false,
+                timer: 1500,
+                didClose: () => {
+                    setVideo(null);
+                },
+            });
         } catch (error) {
             console.error('Error uploading video:', error);
+
+            // Thông báo lỗi
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong. Please try again.',
+                confirmButtonText: 'Try Again',
+            });
         }
     };
+
     const toggelStyle = {
         width: '38px',
         height: '22px',

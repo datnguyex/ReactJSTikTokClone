@@ -5,25 +5,26 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 const cx = classNames.bind(style);
 
-function Home({ handleCommentVideo, userValue, reaload }) {
+function Home({ handleDisplayLogin, handleCommentVideo, userValue, reaload, reLoadComment }) {
     const [usersSuggested, SetUsersSuggested] = useState([]);
     const [checkReload, setChechReload] = useState();
     const fetchUsersSuggested = () => {
         if (!userValue) {
             return;
+        } else {
+            axios
+                .get('http://localhost:8000/api/getVideoSuggested', {
+                    params: {
+                        user_id: userValue.id,
+                    },
+                })
+                .then((response) => {
+                    SetUsersSuggested(response.data.data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching user data:', error.response ? error.response.data : error.message);
+                });
         }
-        axios
-            .get('http://localhost:8000/api/getVideoSuggested', {
-                params: {
-                    user_id: userValue.id,
-                },
-            })
-            .then((response) => {
-                SetUsersSuggested(response.data.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching user data:', error.response ? error.response.data : error.message);
-            });
     };
 
     useEffect(() => {
@@ -43,7 +44,13 @@ function Home({ handleCommentVideo, userValue, reaload }) {
     return (
         <div id="wrapz" className={cx('wrapper')}>
             {usersSuggested.map((index) => (
-                <HomeItem handleCommentVideo={handleCommentVideo} usersSuggested={index} />
+                <HomeItem
+                    handleDisplayLogin={handleDisplayLogin}
+                    reLoadComment={reLoadComment}
+                    userValue={userValue}
+                    handleCommentVideo={handleCommentVideo}
+                    usersSuggested={index}
+                />
             ))}
         </div>
     );

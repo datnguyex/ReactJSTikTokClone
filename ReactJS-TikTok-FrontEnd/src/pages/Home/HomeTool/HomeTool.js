@@ -7,8 +7,24 @@ import PropTypes from 'prop-types';
 const cx = classNames.bind(style);
 
 const HomeTool = forwardRef(
-    ({ usersSuggested, handleCommentVideo, className, onClick, icon, text, avatar = false }, ref) => {
+    (
+        {
+            userValue,
+            handleDisplayLogin,
+            usersSuggested,
+            handleCommentVideo,
+            className,
+            onClick,
+            icon,
+            text,
+            avatar = false,
+        },
+        ref,
+    ) => {
         const handleClick = (event) => {
+            if (userValue == null) {
+                return handleDisplayLogin(true);
+            }
             if (typeof handleCommentVideo === 'function') {
                 // handleCommentVideo(`http://127.0.0.1:8000/storage/${usersSuggested.path}`);
                 handleCommentVideo(usersSuggested);

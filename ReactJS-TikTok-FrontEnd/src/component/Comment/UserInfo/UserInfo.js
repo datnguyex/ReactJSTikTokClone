@@ -26,12 +26,23 @@ function UserInfo({
     heartComment,
     commentVideo,
     userValue,
+    totalHear,
+    hearValue,
+    handleReloadComment,
 }) {
+    const [reload, setReload] = useState(true);
+    const handleSetReload = () => {
+        setReload(!reload);
+    };
+    console.log('reload', reload);
     return (
         <>
             <div className={cx('wrap-content__right')}>
                 {
                     <UserComment
+                        hearValue={hearValue}
+                        userValue={userValue}
+                        reload={reload}
                         changeType={changeType}
                         handleChangeType={handleChangeType}
                         save={save}
@@ -41,6 +52,7 @@ function UserInfo({
                         line={line}
                         handleLine={handleLine}
                         commentVideo={commentVideo}
+                        totalHear={totalHear}
                     />
                 }
                 <div className={cx('line-top')}></div>
@@ -48,10 +60,13 @@ function UserInfo({
                 {changeType == 'Comments' ? (
                     <>
                         <TypeComment
+                            reload={reload}
+                            handleSetReload={handleSetReload}
                             userValue={userValue}
                             commentVideo={commentVideo}
                             handleHeartComment={handleHeartComment}
                             heartComment={heartComment}
+                            handleReloadComment={handleReloadComment}
                         />
                     </>
                 ) : (

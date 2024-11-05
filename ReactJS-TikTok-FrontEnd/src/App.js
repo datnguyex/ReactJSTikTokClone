@@ -16,7 +16,11 @@ function App() {
     const [commentVideo, setCommentVideo] = useState(null);
     const [displayLogOut, setDisPlayLogOut] = useState(false);
     const [reaload, setReload] = useState(false);
+    const [reLoadComment, setReloadComment] = useState(true);
 
+    const handleReloadComment = () => {
+        setReloadComment(!reLoadComment);
+    };
     const handleReloadSidebar = () => {
         setReload(!reaload);
     };
@@ -99,6 +103,7 @@ function App() {
                                         )}
                                         {commentVideo && (
                                             <Comment
+                                                handleReloadComment={handleReloadComment}
                                                 userValue={userValue}
                                                 handleCommentVideo={handleCommentVideo}
                                                 commentVideo={commentVideo}
@@ -122,6 +127,8 @@ function App() {
                                             />
                                         ) : (
                                             <Page
+                                                handleDisplayLogin={handleDisplayLogin}
+                                                reLoadComment={reLoadComment}
                                                 reaload={reaload}
                                                 userValue={userValue}
                                                 handleCommentVideo={handleCommentVideo}

@@ -7,6 +7,8 @@ import 'tippy.js/dist/tippy.css';
 import { Image } from '~/component/Image';
 import { CommentShare } from '~/component/Array';
 import { format } from 'date-fns';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import {
     HeartIcon,
     HeartSolidIcon,
@@ -32,10 +34,36 @@ function UserComment({
     save,
     handleChangeType,
     changeType,
+    reload,
+    userValue,
+    hearValue,
+    totalHear,
 }) {
-    console.log('commentVideo', commentVideo);
+    // console.log('commentVideo', commentVideo);
+    const [totalComments, setTotalComments] = useState(0);
     const created_at = new Date(commentVideo.user.created_at);
+    // const [loadPage, setLoadPage] = useState(true);
     const formattedDate = `${created_at.getDate()}/${created_at.getMonth() + 1}/${created_at.getFullYear()}`;
+    const FetchDataComment = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/api/getTotalCommentVideo', {
+                params: {
+                    videoID: commentVideo.id,
+                },
+            });
+            // console.log('comments', response.data);
+            setTotalComments(response.data.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error.response ? error.response.data : error.message);
+        }
+    };
+
+    useEffect(() => {
+        FetchDataComment();
+    }, [reload]);
+    // useEffect(() => {
+    //     handleCheckLikeVideo();
+    // }, [userValue]);
     return (
         <>
             <div className={cx('content-right')}>
@@ -102,21 +130,21 @@ function UserComment({
                 <div className={cx('wrap__list-icon')}>
                     <div className="left__list-icon">
                         <div className={cx('item-left')}>
-                            <div onClick={handleHeart} className={cx('wrap__icon-text')}>
-                                <span className={cx('item-icon')}>
-                                    {heart == false ? (
+                            <div className={cx('wrap__icon-text')}>
+                                <span onClick={() => handleHeart(!hearValue)} className={cx('item-icon')}>
+                                    {hearValue == false ? (
                                         <HeartIcon width={'20'} height={'20'} />
                                     ) : (
                                         <HeartSolidIcon width={'20'} height={'20'} />
                                     )}
                                 </span>
-                                <stong className={cx('item-text')}>6574</stong>
+                                <stong className={cx('item-text')}>{totalHear}</stong>
                             </div>
                             <div className={cx('wrap__icon-text')}>
                                 <span className={cx('item-icon')}>
                                     <CommentIcon width={'20'} height={'20'} />
                                 </span>
-                                <stong className={cx('item-text')}>102</stong>
+                                <stong className={cx('item-text')}>{totalComments}</stong>
                             </div>
                             <div className={cx('wrap__icon-text')}>
                                 <span onClick={handleSave} className={cx('item-icon')}>
@@ -168,7 +196,7 @@ function UserComment({
                         onClick={() => handleChangeType('Comments')}
                         className={cx('type-item', changeType == 'Comments' ? 'type-item__solid' : '')}
                     >
-                        Comments (2044)
+                        Comments ({totalComments})
                     </p>
                     <p
                         onClick={() => handleChangeType('Creator Videos')}

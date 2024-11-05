@@ -6,32 +6,49 @@ import style from './UpdateProfile.module.scss';
 import { Image } from '~/component/Image';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+
 const cx = classNames.bind(style);
+
 function UpdateProfile({ onClick, showUpdate, userValue, handleUserValue }) {
     const [username, setUsername] = useState('');
     const [nickname, setNickname] = useState('');
     const [bio, setBio] = useState('');
-    const [img, setImg] = useState('');
+    const [img, setImg] = useState(null);
+    const [newImageUrl, setNewImageUrl] = useState(''); // State for the new image URL
     const [nameClass, setNameClass] = useState(true);
+
     const imageUrl = `http://127.0.0.1:8000/storage/${userValue.image}`;
+
     const handleTimeout = () => {
         setNameClass((pre) => !pre);
         setTimeout(() => {
             onClick();
         }, 200);
     };
+
     const navigate = useNavigate();
+
     const handleUserName = (e) => {
         setUsername(e.target.value);
     };
+
     const handleNickname = (e) => {
         setNickname(e.target.value);
     };
+
     const handleBio = (e) => {
         setBio(e.target.value);
     };
+
     const handleImg = (e) => {
-        setImg(e.target.files[0]);
+        const file = e.target.files[0];
+        setImg(file);
+
+        // Create a temporary URL for the selected image
+        if (file) {
+            const newUrl = URL.createObjectURL(file);
+            setNewImageUrl(newUrl); // Set the new image URL
+        }
     };
 
     const handleUpdateProfile = () => {
@@ -40,9 +57,11 @@ function UpdateProfile({ onClick, showUpdate, userValue, handleUserValue }) {
         formData.append('username', username);
         formData.append('nickname', nickname);
         formData.append('bio', bio);
+
         if (img) {
             formData.append('image', img);
         }
+
         axios
             .post('http://127.0.0.1:8000/api/updateUser', formData)
             .then((response) => {
@@ -60,7 +79,7 @@ function UpdateProfile({ onClick, showUpdate, userValue, handleUserValue }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('wrap-content')}>
-                <div className={cx(nameClass == true ? 'content' : 'hidden')}>
+                <div className={cx(nameClass === true ? 'content' : 'hidden')}>
                     <div className={cx('title')}>
                         <h1 className={cx('text-title')}>Edit profile</h1>
                         <span onClick={handleTimeout} className={cx('icon-title')}>
@@ -71,7 +90,12 @@ function UpdateProfile({ onClick, showUpdate, userValue, handleUserValue }) {
                         <div className={cx('item')}>
                             <h2 className={cx('text-img')}>Edit profile</h2>
                             <div className={cx('wrap-img')}>
-                                <Image className={cx('img')} alt="User profile" src={imageUrl} />
+                                {newImageUrl == '' ? (
+                                    <Image className={cx('img')} alt="User profile" src={imageUrl} />
+                                ) : (
+                                    <img className={cx('img')} alt="User profile" src={newImageUrl} />
+                                )}
+
                                 <input onChange={(e) => handleImg(e)} className={cx('choose-img')} type="file" />
                             </div>
                         </div>
@@ -91,7 +115,6 @@ function UpdateProfile({ onClick, showUpdate, userValue, handleUserValue }) {
                                 </p>
                             </div>
                         </div>
-
                         <div className={cx('item')}>
                             <h2 className={cx('text-username')}>Name</h2>
                             <div className={cx('wrap-username')}>
@@ -101,7 +124,6 @@ function UpdateProfile({ onClick, showUpdate, userValue, handleUserValue }) {
                                     value={nickname}
                                     onChange={(e) => handleNickname(e)}
                                 />
-
                                 <p className={cx('address-username')}>
                                     Your nickname can only be changed once every 7 days.
                                 </p>
