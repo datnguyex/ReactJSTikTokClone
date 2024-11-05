@@ -39,6 +39,62 @@ class VideoSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'user_id' => 3,
+                'description' => 'Video cua quan 1',
+                'path' => 'videos/m3CaU6t5kNFu0NVxyfmtAEJFOkPnwhoqZXOuHy3u.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 3,
+                'description' => 'Video cua quan 2',
+                'path' => 'videos/D8gqDMtInf2YFngih8WqIHFkZaQnT47VAuxPXszs.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 4,
+                'description' => 'Video cua vy 1',
+                'path' => 'videos/7aHTencwGHHM4Bs9R1wSWeWXRbriZW2ApnVy3Grx.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 4,
+                'description' => 'Video cua vy 2',
+                'path' => 'videos/hqUZdRcfbZiwlofrdR2zEPtEeVjpO8VJIaxeFdD1.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 5,
+                'description' => 'Video cua tram 1',
+                'path' => 'videos/m3CaU6t5kNFu0NVxyfmtAEJFOkPnwhoqZXOuHy3u.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 5,
+                'description' => 'Video cua tram 2',
+                'path' => 'videos/D8gqDMtInf2YFngih8WqIHFkZaQnT47VAuxPXszs.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 6,
+                'description' => 'Video cua hung 1',
+                'path' => 'videos/m3CaU6t5kNFu0NVxyfmtAEJFOkPnwhoqZXOuHy3u.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 6,
+                'description' => 'Video cua hung 2',
+                'path' => 'videos/D8gqDMtInf2YFngih8WqIHFkZaQnT47VAuxPXszs.mp4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         // Chèn dữ liệu vào bảng videos

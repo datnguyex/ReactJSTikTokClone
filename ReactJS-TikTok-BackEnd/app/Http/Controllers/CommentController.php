@@ -24,9 +24,23 @@ class CommentController extends Controller
         $comments = Comment::with('user')->where("video_id", $request->video_id)->orderBy('created_at', 'desc')->get();
         if($comments) {
             return response([
-                'message' => 'get comments succesful',
+                'message' => 'get comments succesfull',
                 'data' => $comments,
             ],200);
         }
+    }
+    public function getTotalCommentVideo(Request $request) {
+        $totalComments = Comment::where('video_id',$request->videoID)->count();
+        if($totalComments) {
+            return response([
+                'message' => 'get total comments succesfull',
+                'data' => $totalComments,
+            ],200);   
+        } else {
+            return response([
+                'message' => 'get total comments not succesfull',
+            ],400);   
+        }
+
     }
 }

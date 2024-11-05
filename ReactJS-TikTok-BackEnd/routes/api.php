@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,8 @@ Route::get('getVideoFollowingUsers', [UserController::class, 'getVideoFollowingU
 Route::get('getVideoSuggested', [UserController::class, 'getVideoSuggested']);
 Route::post('commentVideo', [CommentController::class, 'commentVideo']);
 Route::get('getCommentVideo', [CommentController::class, 'getCommentVideo']);
+Route::post('likeVideo', [LikeController::class, 'likeVideo']);
+Route::get('getTotalLikeVideo', [LikeController::class, 'getTotalLikeVideo']);
+Route::post('checkLikeVideo', [LikeController::class, 'checkLikeVideo']);
+Route::get('getTotalCommentVideo', [CommentController::class, 'getTotalCommentVideo']);
+Route::get('getLikedVideo', [LikeController::class, 'getLikedVideo']);
